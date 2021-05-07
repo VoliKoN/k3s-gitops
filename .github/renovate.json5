@@ -36,13 +36,13 @@
       "separateMinorPatch": true
     },
     // global docker datasource settings
+    // "separateMinorPatch": true
     {
       "matchDatasources": ["docker"],
       "enabled": true,
       "commitMessageTopic": "container image {{depName}}",
       "commitMessageExtra": "to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}",
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "separateMinorPatch": true
+      "matchUpdateTypes": ["major", "minor", "patch"]
     },
     // add labels according to package and update types
     {
