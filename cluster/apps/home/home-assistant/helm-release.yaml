@@ -1,0 +1,97 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: home-assistant
+      version: 8.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/home-assistant/home-assistant
+      tag: 2021.5.1
+    env:
+      TZ: "Asia/Jerusalem"
+      HASS_RECORDER_POSTGRESQL: "${SECRET_POSTGRESQL_PASS}"
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
+    service:
+      type: LoadBalancer
+      loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
+      externalTrafficPolicy: Local
+    ingress:
+      enabled: true
+      hosts:
+      - host: "ha.${SECRET_DOMAIN}"
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "ha.${SECRET_DOMAIN}"
+    prometheus:
+      serviceMonitor:
+        enabled: false
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config-v1
+    postgresql:
+      enabled: true
+      postgresqlPassword: "${SECRET_POSTGRESQL_PASS}"
+      persistence:
+        enabled: true
+        size: 4Gi
+        storageClass: "rook-ceph-block"
+    addons:
+      codeserver:
+        enabled: true
+        image:
+          repository: codercom/code-server
+          tag: 3.9.3
+        # git:
+        #   deployKeySecret: code-server
+        workingDir: "/config"
+        args:
+        - --auth
+        - "none"
+        - --user-data-dir
+        - "/config/.vscode"
+        - --extensions-dir
+        - "/config/.vscode"
+        ingress:
+          enabled: true
+          hosts:
+          - host: "ha-vscode.${SECRET_DOMAIN}"
+            paths:
+            - path: /
+              pathType: Prefix
+          tls:
+          - hosts:
+            - "ha-vscode.${SECRET_DOMAIN}"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        memory: 4000Mi

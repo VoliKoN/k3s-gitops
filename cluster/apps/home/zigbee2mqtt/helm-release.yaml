@@ -1,0 +1,119 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zigbee2mqtt
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: zigbee2mqtt
+      version: 7.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/koenkk/zigbee2mqtt
+      tag: 1.18.3
+    env:
+      TZ: Asia/Jerusalem
+      ZIGBEE2MQTT_DATA: /data
+    config:
+      homeassistant: true
+      device_options:
+        retain: true
+      permit_join: false
+      mqtt:
+        base_topic: zigbee2mqtt
+        server: "mqtt://vernemq"
+        user: "nouserneeded"
+        password: "nouserneeded"
+      serial:
+        port: /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018E306B4-if00
+      advanced:
+        log_output:
+        - console
+        pan_id: 25074
+        network_key:
+        - 28
+        - 211
+        - 223
+        - 33
+        - 54
+        - 75
+        - 160
+        - 64
+        - 116
+        - 226
+        - 85
+        - 86
+        - 166
+        - 21
+        - 232
+        - 216
+      frontend:
+        port: 8080
+      experimental:
+        new_api: true
+    securityContext:
+      privileged: true
+    ingress:
+      enabled: true
+      hosts:
+      - host: "zigbee.${SECRET_DOMAIN}"
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "zigbee.${SECRET_DOMAIN}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: zigbee2mqtt-config-v1
+        mountPath: "/data"
+    additionalVolumeMounts:
+    - name: usb
+      mountPath: /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018E306B4-if00
+    additionalVolumes:
+    - name: usb
+      hostPath:
+        path: /serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018E306B4-if00
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - {key: "feature.node.kubernetes.io/custom-zigbee", operator: In, values: ["true"]}
+    # addons:
+    #   codeserver:
+    #     enabled: true
+    #     image:
+    #       repository: codercom/code-server
+    #       tag: 3.9.2
+    #     workingDir: "/data"
+    #     args:
+    #     - --user-data-dir
+    #     - "/data/.vscode"
+    #     - --auth
+    #     - "none"
+    #     ingress:
+    #       enabled: true
+    #       annotations:
+    #         kubernetes.io/ingress.class: "internal"
+    #       hosts:
+    #       - host: "zigbee2mqtt-config.${SECRET_DOMAIN}"
+    #         paths:
+    #         - path: /
+    #           pathType: Prefix
+    #       tls:
+    #       - hosts:
+    #         - "zigbee2mqtt-config.${SECRET_DOMAIN}"
+    #     volumeMounts:
+    #     - name: config
+    #       mountPath: /data
