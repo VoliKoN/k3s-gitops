@@ -5,6 +5,6 @@ resources:
 - system-upgrade
 - monitoring
 - flux-system
-# - kasten-io
+- kasten-io
 - kube-system
 - media
