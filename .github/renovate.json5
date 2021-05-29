@@ -74,6 +74,14 @@
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
       "labels": ["renovate/helm", "dep/patch"]
+    },
+    // Version strategies
+    {
+      "datasources": ["docker"],
+      "packageNames": [
+        "ghcr.io/linuxserver/jellyfin"
+      ],
+      "versioning": "loose"
     }
   ]
 }
