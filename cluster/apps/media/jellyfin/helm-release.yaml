@@ -17,11 +17,13 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: jellyfin/jellyfin
-      tag: 10.7.5
+      repository: ghcr.io/linuxserver/jellyfin
+      tag: version-10.7.1-1
     env:
       TZ: "Asia/Jerusalem"
       JELLYFIN_CACHE_DIR: "/config/cache"
+      PUID: 1000
+      PGID: 1000
     # podSecurityContext:
     #   supplementalGroups:
     #   - 44
