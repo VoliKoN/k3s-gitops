@@ -12,7 +12,7 @@ resources:
 # - overseerr
 # - plex
 # - prowlarr
-# - qbittorrent
+- qbittorrent
 - radarr
 # - rtorrent-flood
 # - sabnzbd
