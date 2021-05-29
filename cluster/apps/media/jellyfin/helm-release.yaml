@@ -1,0 +1,70 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: jellyfin
+      version: 7.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: jellyfin/jellyfin
+      tag: 10.7.5
+    env:
+      TZ: "Asia/Jerusalem"
+      JELLYFIN_CACHE_DIR: "/config/cache"
+    # podSecurityContext:
+    #   supplementalGroups:
+    #   - 44
+    #   - 109
+    #   - 100
+    service:
+      enabled: true
+      type: LoadBalancer
+      externalIPs:
+      - "${LB_JELLYFIN_IP}"
+      externalTrafficPolicy: Local
+    ingress:
+      enabled: true
+      hosts:
+      - host: "jellyfin.${SECRET_DOMAIN}"
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "jellyfin.${SECRET_DOMAIN}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: jellyfin-config-v1
+      # transcode:
+      #   enabled: true
+      #   emptyDir:
+      #     enabled: true
+      #     medium: "Memory"
+    additionalVolumeMounts:
+    - name: media-storage
+      mountPath: "/media/storage/Media"
+      readOnly: true
+    additionalVolumes:
+    - name: media-storage
+      persistentVolumeClaim:
+        claimName: nfs-media-storage-pvc
+    resources:
+      requests:
+        # gpu.intel.com/i915: 1
+        cpu: 500m
+        memory: 1000Mi
+      limits:
+        # gpu.intel.com/i915: 1
+        memory: 4000Mi
