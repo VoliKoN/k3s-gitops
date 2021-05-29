@@ -54,7 +54,7 @@ spec:
     additionalVolumeMounts:
     - name: media-storage
       mountPath: "/media/storage/Media"
-      readOnly: true
+      readOnly: false
     additionalVolumes:
     - name: media-storage
       persistentVolumeClaim:
