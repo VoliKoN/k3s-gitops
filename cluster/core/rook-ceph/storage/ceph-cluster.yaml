@@ -60,12 +60,12 @@ spec:
       metadataDevice:
       osdsPerDevice: "1"
     nodes:
-    - name: "k3s-worker1"
-      devices:
-      - name: "sdb"
+    # - name: "k3s-worker1"
+    #   devices:
+    #   - name: "sdb"
     - name: "k3s-worker2"
       devices:
       - name: "sdb"
-    - name: "k3s-worker3"
-      devices:
-      - name: "sdb"
+    # - name: "k3s-worker3"
+    #   devices:
+    #   - name: "sdb"
