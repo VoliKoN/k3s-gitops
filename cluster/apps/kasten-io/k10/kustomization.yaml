@@ -6,4 +6,4 @@ resources:
 - service-monitor.yaml
 - policies
 # # TODO Enable on cluster re-install
-# - profiles
+- profiles
