@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: jellyfin
-      version: 7.4.0
+      version: 8.2.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -30,20 +30,22 @@ spec:
     #   - 109
     #   - 100
     service:
-      enabled: true
-      type: LoadBalancer
-      loadBalancerIP: "${LB_JELLYFIN_IP}"
-      externalTrafficPolicy: Local
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: "${LB_JELLYFIN_IP}"
+        externalTrafficPolicy: Local
     ingress:
-      enabled: true
-      hosts:
-      - host: "jf.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "jf.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        hosts:
+        - host: "jf.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "jf.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true

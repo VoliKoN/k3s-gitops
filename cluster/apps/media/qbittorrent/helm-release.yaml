@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: qbittorrent
-      version: 10.1.0
+      version: 11.2.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -23,8 +23,8 @@ spec:
     env:
       TZ: "Asia/Jerusalem"
     service:
-      additionalServices:
-      - enabled: true
+      bittorrent:
+        enabled: true
         nameSuffix: bittorrent
         type: LoadBalancer
         loadBalancerIP: "${LB_QBITTORRENT_IP}"
@@ -35,15 +35,16 @@ spec:
           targetPort: 50413
         externalTrafficPolicy: Local
     ingress:
-      enabled: true
-      hosts:
-      - host: "qb.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "qb.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        hosts:
+        - host: "qb.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "qb.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true
