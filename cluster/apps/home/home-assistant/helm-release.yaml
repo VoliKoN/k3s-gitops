@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: home-assistant
-      version: 8.3.1
+      version: 9.2.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -26,22 +26,21 @@ spec:
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
     service:
-      type: LoadBalancer
-      loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
-      externalTrafficPolicy: Local
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
+        externalTrafficPolicy: Local
     ingress:
-      enabled: true
-      hosts:
-      - host: "ha.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "ha.${SECRET_DOMAIN}"
-    prometheus:
-      serviceMonitor:
-        enabled: false
+      main:
+        enabled: true
+        hosts:
+        - host: "ha.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "ha.${SECRET_DOMAIN}"
     probes:
       liveness:
         enabled: false
@@ -77,15 +76,16 @@ spec:
         - --extensions-dir
         - "/config/.vscode"
         ingress:
-          enabled: true
-          hosts:
-          - host: "ha-vscode.${SECRET_DOMAIN}"
-            paths:
-            - path: /
-              pathType: Prefix
-          tls:
-          - hosts:
-            - "ha-vscode.${SECRET_DOMAIN}"
+          main:
+            enabled: true
+            hosts:
+            - host: "ha-vscode.${SECRET_DOMAIN}"
+              paths:
+              - path: /
+                pathType: Prefix
+            tls:
+            - hosts:
+              - "ha-vscode.${SECRET_DOMAIN}"
         volumeMounts:
         - name: config
           mountPath: /config
