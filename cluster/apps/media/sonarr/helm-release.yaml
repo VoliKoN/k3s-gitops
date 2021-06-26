@@ -64,8 +64,8 @@ spec:
     prometheus:
       podMonitor:
         enabled: true
-        interval: 3m
-        scrapeTimeout: 1m30s
+        interval: 10m
+        scrapeTimeout: 2m
     additionalContainers:
     - name: exportarr
       image: ghcr.io/onedr0p/exportarr:v0.6.0
