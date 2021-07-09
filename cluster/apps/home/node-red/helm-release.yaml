@@ -30,15 +30,16 @@ spec:
         enabled: true
         existingClaim: nodered-config-v1
     ingress:
-      enabled: true
-      hosts:
-      - host: "nodered.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "nodered.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        hosts:
+        - host: "nodered.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "nodered.${SECRET_DOMAIN}"
     resources:
       requests:
         memory: 350Mi
