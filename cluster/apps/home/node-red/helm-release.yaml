@@ -11,7 +11,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: node-red
-      version: 7.4.0
+      version: 8.0.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -30,15 +30,16 @@ spec:
         enabled: true
         existingClaim: nodered-config-v1
     ingress:
-      enabled: true
-      hosts:
-      - host: "nodered.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "nodered.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        hosts:
+        - host: "nodered.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "nodered.${SECRET_DOMAIN}"
     resources:
       requests:
         memory: 350Mi
