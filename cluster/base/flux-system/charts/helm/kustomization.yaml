@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- bitnami-charts.yaml
 - ingress-nginx-charts.yaml
 - jetstack-charts.yaml
 - k8s-at-home-charts.yaml
@@ -12,3 +11,4 @@ resources:
 - prometheus-community-charts.yaml
 - rook-ceph-charts.yaml
 - vernemq-charts.yaml
+- metallb-charts.yaml
