@@ -12,3 +12,4 @@ resources:
 - rook-ceph-charts.yaml
 - vernemq-charts.yaml
 - metallb-charts.yaml
+- lwolf-charts.yaml
