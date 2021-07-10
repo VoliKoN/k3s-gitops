@@ -13,3 +13,4 @@ resources:
 - vernemq-charts.yaml
 - metallb-charts.yaml
 - lwolf-charts.yaml
+- weaveworks-kured-charts.yaml
