@@ -18,13 +18,11 @@ spec:
       interval: 5m
   values:
     updateStrategy: RollingUpdate
-    extraEnvVars:
-    - name: slackHookUrl
-      value: "${SECRET_ALERT_MANAGER_SLACK_WEBHOOK}"
     configuration:
       startTime: "1:00"
       endTime: "3:00"
       timeZone: "Asia/Jerusalem"
+      notifyUrl: "${SECRET_KURED_SLACK_URL}"
     tolerations:
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
