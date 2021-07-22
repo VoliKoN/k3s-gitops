@@ -37,6 +37,10 @@ spec:
         externalTrafficPolicy: Local
     ingress:
       main:
+        annotations:
+          forecastle.stakater.com/expose: "true"
+          # forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+          forecastle.stakater.com/network-restricted: "true"
         enabled: true
         hosts:
         - host: "jf.${SECRET_DOMAIN}"
