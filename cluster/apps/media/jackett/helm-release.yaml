@@ -26,7 +26,7 @@ spec:
       main:
         annotations:
           forecastle.stakater.com/expose: "true"
-          # forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+          forecastle.stakater.com/icon: "https://github.com/Jackett/Jackett/blob/6a213c6eabd0264392c48564ff16a9035fd13ca4/src/Jackett.Common/Content/apple-touch-icon.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
         hosts:

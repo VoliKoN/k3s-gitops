@@ -39,7 +39,7 @@ spec:
       main:
         annotations:
           forecastle.stakater.com/expose: "true"
-          # forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+          forecastle.stakater.com/icon: "https://github.com/jellyfin/jellyfin-ux/blob/85036d6b64835aeff7720aa72924357b95d9a89f/branding/reddit/sidebarimg.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
         hosts:
