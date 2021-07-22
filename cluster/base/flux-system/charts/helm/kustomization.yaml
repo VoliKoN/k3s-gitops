@@ -14,3 +14,4 @@ resources:
 - metallb-charts.yaml
 - lwolf-charts.yaml
 - weaveworks-kured-charts.yaml
+- stakater-charts.yaml

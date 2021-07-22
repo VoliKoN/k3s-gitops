@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: forecastle
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://stakater.github.io/stakater-charts
+      chart: forecastle
+      version: v1.0.64
+      sourceRef:
+        kind: HelmRepository
+        name: stakater-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    forecastle:
+      config:
+        title: "efk8s Apps"
+        namespaceSelector:
+          matchNames:
+          - media
+          - home
+          - networking
+          - rook-ceph
+          - monitoring
+#        customApps:
+#        - name: Tvheadend
+#          icon: "https://www.minipctv.de/wp-content/uploads/TV-Headend-Logo-ohne-Schriftzug.jpg"
+#          url: "https://tvheadend.${SECRET_DOMAIN}"
+#          group: MEDIA
+      ingress:
+        enabled: true
+        annotations:
+          # kubernetes.io/ingress.class: "nginx"
+          # nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          # nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+          forecastle.stakater.com/network-restricted: "true"
+        hosts:
+        - host: "forecastle.${SECRET_DOMAIN}"
+          paths:
+          - /
+        tls:
+        - hosts:
+          - "forecastle.${SECRET_DOMAIN}"
