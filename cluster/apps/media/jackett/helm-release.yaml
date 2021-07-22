@@ -26,7 +26,7 @@ spec:
       main:
         annotations:
           forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://github.com/Jackett/Jackett/blob/6a213c6eabd0264392c48564ff16a9035fd13ca4/src/Jackett.Common/Content/apple-touch-icon.png"
+          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Jackett/Jackett/6a213c6eabd0264392c48564ff16a9035fd13ca4/src/Jackett.Common/Content/apple-touch-icon.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
         hosts:

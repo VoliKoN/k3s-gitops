@@ -26,7 +26,7 @@ spec:
       main:
         annotations:
           forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://github.com/Sonarr/Sonarr/blob/4659a8366d8a1565890d3b72442bd35c6eb8176e/Logo/128.png"
+          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Sonarr/Sonarr/4659a8366d8a1565890d3b72442bd35c6eb8176e/Logo/128.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
         hosts:
