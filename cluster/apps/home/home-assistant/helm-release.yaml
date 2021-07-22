@@ -82,7 +82,7 @@ spec:
         ingress:
           annotations:
             forecastle.stakater.com/expose: "true"
-            # forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+            forecastle.stakater.com/icon: "https://raw.githubusercontent.com/home-assistant/frontend/a339de89f50a52170945728cdbcac1a2d11d433b/public/static/icons/favicon-192x192.png"
             forecastle.stakater.com/network-restricted: "true"
           enabled: true
           hosts:
