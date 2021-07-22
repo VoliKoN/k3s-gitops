@@ -7,6 +7,10 @@ metadata:
   labels:
     app.kubernetes.io/instance: rook-ceph-mgr-dashboard
     app.kubernetes.io/name: rook-ceph-mgr-dashboard
+  annotations:
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/icon: "https://www.edgenexus.io/wp-content/uploads/2021/06/ceph-logo.png"
+    forecastle.stakater.com/network-restricted: "true"
 spec:
   # ingressClassName: "traefik"
   rules:
