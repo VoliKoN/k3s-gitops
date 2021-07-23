@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://vernemq.github.io/docker-vernemq
       chart: vernemq
-      version: 1.6.10
+      version: 1.6.7
       sourceRef:
         kind: HelmRepository
         name: vernemq-charts
@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: vernemq/vernemq
-      tag: 1.12.1-alpine
+      tag: 1.11.0-alpine
     replicaCount: 1
     serviceMonitor:
       create: true
