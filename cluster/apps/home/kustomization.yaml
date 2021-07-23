@@ -7,3 +7,4 @@ resources:
 - esphome
 - node-red
 - forecastle
+- thelounge
