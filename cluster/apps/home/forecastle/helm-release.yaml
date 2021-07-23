@@ -27,6 +27,7 @@ spec:
           - networking
           - rook-ceph
           - monitoring
+          - kasten-io
 #        customApps:
 #        - name: Tvheadend
 #          icon: "https://www.minipctv.de/wp-content/uploads/TV-Headend-Logo-ohne-Schriftzug.jpg"

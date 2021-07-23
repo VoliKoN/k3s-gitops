@@ -30,6 +30,10 @@ spec:
         enabled: true
     clusterName: k8s
     ingress:
+      annotations:
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/icon: "https://mp.s81c.com/pwb-production/c4a833f11e311146a23c643651068b75/k10-platform-logo-vertical-black-01-4d612e94-9053-4d14-a3c5-e4470582b282_6308f437-e24f-49c1-a8ee-a9034c82dcc0.png"
+        forecastle.stakater.com/network-restricted: "true"
       create: true
       host: "k10.${SECRET_DOMAIN}"
       urlPath: k10
