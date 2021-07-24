@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: wiki
+  name: wiki
+  namespace: home
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: wiki
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wiki
+    spec:
+      containers:
+        - image: ghcr.io/volikon/wiki:auto-1627134394 # {"$imagepolicy": "flux-system:wiki"}
+          name: wiki
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+      imagePullSecrets:
+        - name: ghcr-creds
