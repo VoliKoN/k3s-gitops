@@ -5,3 +5,6 @@ resources:
 - ingress.yaml
 - service.yaml
 - ghcr-creds.yaml
+- image-automation.yaml
+- image-policy.yaml
+- image-repo.yaml
