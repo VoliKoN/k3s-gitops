@@ -8,9 +8,9 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://github.com/VoliKoN/k3s-gitops
+  url: ssh://git@github.com/VoliKoN/k3s-gitops
   secretRef:
-    name: https-credentials
+    name: ssh-credentials
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
