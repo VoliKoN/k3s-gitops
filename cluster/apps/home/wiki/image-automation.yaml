@@ -2,7 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
   name: wiki-update
-  namespace: home
+  namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository

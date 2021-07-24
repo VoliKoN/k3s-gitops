@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: wiki-image
-  namespace: home
+  name: wiki
+  namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: wiki-image
+    name: wiki
   filterTags:
     pattern: '^auto-(?P<ts>.*)'
     extract: '$ts'

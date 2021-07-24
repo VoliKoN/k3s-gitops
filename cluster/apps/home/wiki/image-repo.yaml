@@ -1,8 +1,8 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: wiki-image
-  namespace: home
+  name: wiki
+  namespace: flux-system
 spec:
   image: ghcr.io/volikon/wiki
   interval: 1m0s
