@@ -18,5 +18,10 @@ spec:
   tolerations:
   - key: "node-role.kubernetes.io/master"
     operator: "Exists"
+  prepare:
+    image: rancher/k3s-upgrade
+    args:
+    - "prepare"
+    - "k3s-server"
   upgrade:
     image: rancher/k3s-upgrade
