@@ -7,7 +7,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  interval: 1m
+  interval: 5m
   update:
     path: ./cluster/apps/home/wiki
     strategy: Setters
