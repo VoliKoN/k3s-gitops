@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: single-node
+    branch: main
   url: ssh://git@github.com/VoliKoN/k3s-gitops
   secretRef:
     name: ssh-credentials
