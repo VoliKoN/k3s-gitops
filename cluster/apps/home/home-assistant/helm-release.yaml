@@ -62,7 +62,7 @@ spec:
       persistence:
         enabled: true
         size: 4Gi
-        storageClass: "rook-ceph-block"
+        storageClass: "local-path"
     addons:
       codeserver:
         enabled: true
