@@ -7,5 +7,5 @@ resources:
 - flux-system
 # - kasten-io
 - kube-system
-# - media
+- media
 - home
