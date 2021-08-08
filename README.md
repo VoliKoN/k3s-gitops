@@ -2,7 +2,7 @@
 
 This repository contains files and instructions for deploying my home cluster on [k3s](https://k3s.io/) using [k3sup](https://github.com/alexellis/k3sup) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/).
 
-I'm using 3 physical nodes running [Proxmox](https://proxmox.com/en/) and a VM for every node in the cluster. I'm using 1 master and 3 worker VMs.
+I'm currently using a single node running in a vm on Proxmox.
 
 For docs please see [Setup](docs/setup.md).
 ## :wave:&nbsp; Introduction
@@ -11,7 +11,7 @@ The cluster is using those tools:
 
 - [flannel](https://github.com/flannel-io/flannel)
 - [flux](https://toolkit.fluxcd.io/)
-- [rook-ceph](https://github.com/rook/rook)
+- [~~rook-ceph~~](https://github.com/rook/rook)
 - [metallb](https://metallb.universe.tf/)
 - [cert-manager](https://cert-manager.io/) with Cloudflare DNS challenge
 - [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)

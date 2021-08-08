@@ -3,7 +3,7 @@
 
 ### :computer:&nbsp; Nodes
 
-I'm using 3 physical nodes running [Proxmox](https://proxmox.com/en/) and a VM for every node in the cluster.
+I'm currently using a single node running in a vm on [Proxmox](https://proxmox.com/en/).
 ### :wrench:&nbsp; Tools
 
 :round_pushpin: Need to install the required CLI tools listed below on workstation.
@@ -123,20 +123,20 @@ export FLUX_KEY_FP=AB675CE4CC64251G3S9AE1DAA88ARRTY2C009E2D
 
 ```sh
 k3sup install \
-    --host=169.254.1.1 \
-    --user=k8s-at-home \
-    --k3s-version=v1.20.5+k3s1 \
+    --ip=169.254.1.1 \
+    --user=nevo \
+    --k3s-version=v1.21.3+k3s1 \
     --k3s-extra-args="--disable servicelb --disable traefik"
 ```
 
-3. Join worker nodes (optional)
+3. ~~Join worker nodes~~ (optional)
 
 ```sh
 k3sup join \
-    --host=169.254.1.2 \
-    --server-host=169.254.1.1 \
-    --k3s-version=v1.20.5+k3s1 \
-    --user=k8s-at-home
+    --ip=169.254.1.2 \
+    --server-ip=169.254.1.1 \
+    --k3s-version=v1.21.3+k3s1 \
+    --user=nevo
 ```
 
 4. Verify the nodes are online
