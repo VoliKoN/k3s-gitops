@@ -39,6 +39,8 @@ spec:
             value: "postgres"
           - name: VIKUNJA_SERVICE_JWTSECRET
             value: ${SECRET_VIKUNJA_JWT_SECRET}
+          - name: VIKUNJA_SERVICE_TIMEZONE
+            value: Asia/Jerusalem
           - name: VIKUNJA_DATABASE_HOST
             value: vikunja-postgresql
           - name: VIKUNJA_DATABASE_DATABASE
