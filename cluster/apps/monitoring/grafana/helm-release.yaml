@@ -17,6 +17,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: grafana/grafana
+      tag: 8.1.0
     deploymentStrategy:
       type: Recreate
     env:
