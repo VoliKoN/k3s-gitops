@@ -32,6 +32,9 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/45919759?s=200&v=4"
           forecastle.stakater.com/network-restricted: "true"
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-auth@kubernetescrd,networking-rfc1918-ips@kubernetescrd
+
         enabled: true
         ingressClassName: "traefik"
         hosts:
