@@ -16,3 +16,4 @@ resources:
 - weaveworks-kured-charts.yaml
 - stakater-charts.yaml
 - authentik-charts.yaml
+- traefik-charts.yaml

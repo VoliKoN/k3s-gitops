@@ -5,7 +5,6 @@ metadata:
   name: wiki-ingress
   namespace: home
   annotations:
-    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/icon: "https://d33wubrfki0l68.cloudfront.net/e43d6fce615884aa5a3427f0ee46d1a3b8a0c7d2/6c3a5/assets/images/tool-icons/mkdocs.png"
     forecastle.stakater.com/network-restricted: "true"
