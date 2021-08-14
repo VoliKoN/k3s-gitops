@@ -29,6 +29,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/morpheus65535/bazarr/2bceafe5af9dbd5cb5d7a3aba719dd88f838ef4d/frontend/src/%40static/logo128.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "bazarr.${SECRET_DOMAIN}"
           paths:

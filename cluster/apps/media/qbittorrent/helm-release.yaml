@@ -41,6 +41,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent.ico"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "qb.${SECRET_DOMAIN}"
           paths:
