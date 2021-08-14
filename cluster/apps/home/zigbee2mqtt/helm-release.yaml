@@ -69,6 +69,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "zigbee.${SECRET_DOMAIN}"
           paths:

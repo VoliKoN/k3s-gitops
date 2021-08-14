@@ -57,6 +57,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: "traefik"
         annotations:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/appName: "Vikunja"

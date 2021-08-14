@@ -29,6 +29,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Jackett/Jackett/6a213c6eabd0264392c48564ff16a9035fd13ca4/src/Jackett.Common/Content/apple-touch-icon.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "jackett.${SECRET_DOMAIN}"
           paths:

@@ -36,6 +36,7 @@ spec:
           forecastle.stakater.com/icon: "https://nodered.org/about/resources/media/node-red-icon-2.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "nodered.${SECRET_DOMAIN}"
           paths:

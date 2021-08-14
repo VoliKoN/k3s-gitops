@@ -68,6 +68,7 @@ spec:
           equal: ['alertname', 'namespace']
       ingress:
         enabled: true
+        ingressClassName: "traefik"
         pathType: Prefix
         hosts:
         - "alert-manager.${SECRET_DOMAIN}"
@@ -114,6 +115,7 @@ spec:
     prometheus:
       ingress:
         enabled: true
+        ingressClassName: "traefik"
         pathType: Prefix
         hosts:
         - "prometheus.${SECRET_DOMAIN}"

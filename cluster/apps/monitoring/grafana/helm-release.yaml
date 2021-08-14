@@ -167,6 +167,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/stakater/ForecastleIcons/master/grafana.png"
           forecastle.stakater.com/network-restricted: "true"
       enabled: true
+      ingressClassName: "traefik"
       hosts:
       - "grafana.${SECRET_DOMAIN}"
       tls:

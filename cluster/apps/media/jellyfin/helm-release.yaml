@@ -42,6 +42,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/jellyfin/jellyfin-ux/85036d6b64835aeff7720aa72924357b95d9a89f/branding/reddit/sidebarimg.png"
           forecastle.stakater.com/network-restricted: "true"
         enabled: true
+        ingressClassName: "traefik"
         hosts:
         - host: "jf.${SECRET_DOMAIN}"
           paths:
