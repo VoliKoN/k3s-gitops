@@ -15,3 +15,4 @@ resources:
 - lwolf-charts.yaml
 - weaveworks-kured-charts.yaml
 - stakater-charts.yaml
+- authentik-charts.yaml
