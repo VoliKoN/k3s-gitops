@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: sonarr
-      version: 12.3.0
+      version: 13.0.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -74,25 +74,25 @@ spec:
         interval: 10m
         scrapeTimeout: 2m
     additionalContainers:
-    - name: exportarr
-      image: ghcr.io/onedr0p/exportarr:v0.6.1
-      imagePullPolicy: IfNotPresent
-      args: ["exportarr", "sonarr"]
-      env:
-      - name: PORT
-        value: "32123"
-      - name: URL
-        value: "http://localhost"
-      - name: CONFIG
-        value: "/config/config.xml"
-      - name: ENABLE_UNKNOWN_QUEUE_ITEMS
-        value: "true"
-      - name: ENABLE_ADDITIONAL_METRICS
-        value: "true"
-      ports:
       - name: exportarr
-        containerPort: 32123
-      volumeMounts:
-      - name: config
-        mountPath: /config
-        readOnly: true
+        image: ghcr.io/onedr0p/exportarr:v0.6.1
+        imagePullPolicy: IfNotPresent
+        args: ["exportarr", "sonarr"]
+        env:
+        - name: PORT
+          value: "32123"
+        - name: URL
+          value: "http://localhost"
+        - name: CONFIG
+          value: "/config/config.xml"
+        - name: ENABLE_UNKNOWN_QUEUE_ITEMS
+          value: "true"
+        - name: ENABLE_ADDITIONAL_METRICS
+          value: "true"
+        ports:
+        - name: exportarr
+          containerPort: 32123
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          readOnly: true
