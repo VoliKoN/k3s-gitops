@@ -77,20 +77,20 @@ spec:
         #   revision: 5
         #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/2842
-        ceph-cluster:
-          gnetId: 2842
-          revision: 14
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5336
-        ceph-osd:
-          gnetId: 5336
-          revision: 5
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5342
-        ceph-pools:
-          gnetId: 5342
-          revision: 5
-          datasource: Prometheus
+        # ceph-cluster:
+        #   gnetId: 2842
+        #   revision: 14
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5336
+        # ceph-osd:
+        #   gnetId: 5336
+        #   revision: 5
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5342
+        # ceph-pools:
+        #   gnetId: 5342
+        #   revision: 5
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/11315
         # unifi-client-insights:
         #   gnetId: 11315
@@ -120,9 +120,9 @@ spec:
         vernemq:
           url: https://raw.githubusercontent.com/vernemq/vernemq/master/metrics_scripts/grafana/VerneMQ%20Node%20Metrics.json
           datasource: Prometheus
-        nginx-dashboard:
-          url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
-          datasource: Prometheus
+        # nginx-dashboard:
+        #   url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
+        #   datasource: Prometheus
         speedtest:
           gnetId: 13665
           revision: 1
@@ -173,11 +173,8 @@ spec:
       tls:
       - hosts:
         - "grafana.${SECRET_DOMAIN}"
+    serviceAccount:
+      create: true
+      autoMount: true
     persistence:
-      enabled: true
-      storageClassName: "local-path"
-      size: 10Gi
-      accessModes:
-      - ReadWriteOnce
-    # podAnnotations:
-    #   configmap.reloader.stakater.com/reload: "grafana"
+      enabled: false
