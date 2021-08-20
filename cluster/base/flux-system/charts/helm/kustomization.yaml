@@ -17,3 +17,4 @@ resources:
 - stakater-charts.yaml
 - authentik-charts.yaml
 - traefik-charts.yaml
+- bitnami-charts.yaml
