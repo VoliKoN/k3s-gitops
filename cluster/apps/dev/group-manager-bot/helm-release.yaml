@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: ghcr.io/jonatan1609/group-manager-bot
-      tag: 1.0.0
+      tag: fix-docker-9098b60
     controller:
       replicas: 1
     nameOverride: group-manager-bot
