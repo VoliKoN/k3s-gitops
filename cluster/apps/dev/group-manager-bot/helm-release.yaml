@@ -27,6 +27,9 @@ spec:
       config:
         enabled: true
         existingClaim: group-manager-bot-config-v1
+    service:
+      main:
+        enabled: false
     resources:
       requests:
         memory: 100Mi
