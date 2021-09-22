@@ -69,7 +69,7 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png"
           forecastle.stakater.com/network-restricted: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-auth@kubernetescrd,networking-rfc1918-ips@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-authentik-embedded-outpost@kubernetescrd,networking-rfc1918-ips@kubernetescrd
 
         enabled: true
         ingressClassName: "traefik"
