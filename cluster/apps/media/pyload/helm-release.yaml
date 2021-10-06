@@ -1,0 +1,56 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pyload
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: pyload
+      version: 6.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/linuxserver/pyload
+      tag: 0.5.0
+    env:
+      TZ: "Asia/Jerusalem"
+      PUID: "1000"
+      PGID: "1000"
+    ingress:
+      main:
+        annotations:
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://pyload.net/img/banner.png"
+          forecastle.stakater.com/network-restricted: "true"
+        enabled: true
+        ingressClassName: "traefik"
+        hosts:
+        - host: "pyload.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "pyload.${SECRET_DOMAIN}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: pyload-config-v1
+      media-storage:
+        enabled: true
+        existingClaim: nfs-media-storage-pvc
+        mountPath: /media/storage/Media
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 100m
+      limits:
+        memory: 1000Mi
