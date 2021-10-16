@@ -49,6 +49,8 @@ spec:
             value: vikunja
           - name: VIKUNJA_DATABASE_PASSWORD
             value: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
+          - name: VIKUNJA_AUTH_OPENID
+            value: ${VIKUNJA_OPENID_CONFIG}
         volumeMounts:
           - name: files
             mountPath: /app/vikunja/files
