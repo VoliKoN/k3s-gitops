@@ -49,13 +49,13 @@ spec:
             value: vikunja
           - name: VIKUNJA_DATABASE_PASSWORD
             value: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
-          - name: VIKUNJA_AUTH_OPENID
-            value: "{'enabled': 'true', 'redirecturl': 'https://tasks.efk8s.com/auth/openid', 'providers': [{'name': 'vikunja', 'authurl': 'https://authentik.efk8s.com/application/o/vikunja/', 'clientid': '${VIKUNJA_OPENID_CLIENTID}', 'clientsecret': '${VIKUNJA_OPENID_CLIENTSECRET}'}]}"
-          - name: VIKUNJA_AUTH_LOCAL
-            value: "false"
         volumeMounts:
           - name: files
             mountPath: /app/vikunja/files
+          - name: config
+            mountPath: /app/vikunja/config.yml
+            subPath: config.yml
+            readOnly: true
       - name: frontend
         image: vikunja/frontend:0.18.1
     ingress:
@@ -80,6 +80,14 @@ spec:
         enabled: true
         existingClaim: vikunja-files-v1
         mountpath: /app/vikunja/files
+      config:
+        enabled: true
+        type: custom
+        readOnly: true
+        mountPath: "-"
+        volumeSpec:
+          configMap:
+            name: vikunja-config-yml
     postgresql:
       postgresqlPostgresPassword: ${SECRET_VIKUNJA_POSTGRES_ADMIN_PASSWORD}
       postgresqlUsername: vikunja
