@@ -50,7 +50,7 @@ spec:
           - name: VIKUNJA_DATABASE_PASSWORD
             value: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
           - name: VIKUNJA_AUTH_OPENID
-            value: ${VIKUNJA_OPENID_CONFIG}
+            value: "{'enabled': 'true', 'redirecturl': 'https://tasks.efk8s.com/auth/openid', 'providers': [{'name': 'vikunja', 'authurl': 'https://authentik.efk8s.com/application/o/vikunja/', 'clientid': '${VIKUNJA_OPENID_CLIENTID}', 'clientsecret': '${VIKUNJA_OPENID_CLIENTSECRET}'}]}"
         volumeMounts:
           - name: files
             mountPath: /app/vikunja/files
