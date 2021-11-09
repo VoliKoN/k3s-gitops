@@ -67,25 +67,19 @@ spec:
         cpu: 100m
       limits:
         memory: 4000Mi
-    additionalContainers:
-      - name: exporter
-        image: ghcr.io/k8s-at-home/prometheus-qbittorrent-exporter:v1.2.0
-        imagePullPolicy: IfNotPresent
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 1m
+        scrapeTimeout: 10s
+      prometheusRule:
+        enabled: true
+      exporter:
+        image:
+          repository: esanchezm/prometheus-qbittorrent-exporter
+          tag: v1.2.0
         env:
-          - name: QBITTORRENT_HOST
-            value: "http://localhost"
-          - name: QBITTORRENT_PORT
-            value: "8080"
-          - name: QBITTORRENT_USER
-            value: "nevo"
-          - name: QBITTORRENT_PASS
-            value: "${QBITTORRENT_PASSWORD}"
-          - name: EXPORTER_PORT
-            value: "9022"
-          - name: EXPORTER_LOG_LEVEL
-            value: "INFO"
-          - name: METRICS_PREFIX
-            value: "qbittorrent"
-        ports:
-          - name: metrics
-            containerPort: 9022
+          user: "nevo"
+          password: "${QBITTORRENT_PASSWORD}"
+          port: 9022
+          logLevel: INFO
