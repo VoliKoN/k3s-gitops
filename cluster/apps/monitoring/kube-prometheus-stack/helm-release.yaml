@@ -10,13 +10,12 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 23.1.0
+      version: 23.1.6
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
         namespace: flux-system
       interval: 5m
-  timeout: 20m
   values:
     prometheusOperator:
       createCustomResource: false
@@ -142,7 +141,7 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
-        additionalScrapeConfigs:
+        # additionalScrapeConfigs:
         # - job_name: 'node-exporter'
         #   honor_timestamps: true
         #   static_configs:
