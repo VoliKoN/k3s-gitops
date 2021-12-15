@@ -18,3 +18,4 @@ resources:
 - authentik-charts.yaml
 - traefik-charts.yaml
 - bitnami-charts.yaml
+- hajimari-charts.yaml
