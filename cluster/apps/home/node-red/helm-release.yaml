@@ -35,6 +35,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://nodered.org/about/resources/media/node-red-icon-2.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "resistor-nodes"
         enabled: true
         ingressClassName: "traefik"
         hosts:
