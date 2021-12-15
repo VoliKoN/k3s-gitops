@@ -32,6 +32,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/45919759?s=200&v=4"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "chip"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-authentik-embedded-outpost@kubernetescrd,networking-rfc1918-ips@kubernetescrd
 

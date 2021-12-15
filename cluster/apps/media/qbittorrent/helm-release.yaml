@@ -40,6 +40,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent.ico"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cloud-download"
         enabled: true
         ingressClassName: "traefik"
         hosts:

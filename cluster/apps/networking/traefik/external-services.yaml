@@ -32,6 +32,8 @@ metadata:
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/icon: "https://forum.proxmox.com/styles/uix/images/Proxmox-logo-stacked-white-background-1200.png"
     forecastle.stakater.com/network-restricted: "true"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "server-network"
 spec:
   ingressClassName: "traefik"
   tls:
@@ -80,6 +82,8 @@ metadata:
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/icon: "https://docs.octoprint.org/en/1.5.3/_images/octoprint-logo.png"
     forecastle.stakater.com/network-restricted: "true"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "printer-3d-nozzle"
 spec:
   ingressClassName: "traefik"
   tls:

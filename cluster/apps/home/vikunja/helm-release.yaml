@@ -67,6 +67,8 @@ spec:
           forecastle.stakater.com/appName: "Vikunja"
           forecastle.stakater.com/icon: "https://vikunja.io/docs/images/vikunja-logo-white.svg"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "format-list-checks"
         hosts:
           - host: tasks.${SECRET_DOMAIN}
             paths:

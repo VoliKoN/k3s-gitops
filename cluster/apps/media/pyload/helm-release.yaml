@@ -30,6 +30,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://pyload.net/img/banner.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "download"
         enabled: true
         ingressClassName: "traefik"
         hosts:

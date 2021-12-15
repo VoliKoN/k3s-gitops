@@ -192,6 +192,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/stakater/ForecastleIcons/master/grafana.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "chart-areaspline"
       enabled: true
       ingressClassName: "traefik"
       hosts:

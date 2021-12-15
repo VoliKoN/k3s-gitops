@@ -68,6 +68,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "radio-tower"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-authentik-embedded-outpost@kubernetescrd,networking-rfc1918-ips@kubernetescrd
 

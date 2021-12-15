@@ -36,6 +36,8 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/home-assistant/frontend/a339de89f50a52170945728cdbcac1a2d11d433b/public/static/icons/favicon-192x192.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "home-assistant"
         enabled: true
         ingressClassName: "traefik"
         hosts:
@@ -85,6 +87,8 @@ spec:
             forecastle.stakater.com/expose: "true"
             forecastle.stakater.com/icon: "https://raw.githubusercontent.com/home-assistant/frontend/a339de89f50a52170945728cdbcac1a2d11d433b/public/static/icons/favicon-192x192.png"
             forecastle.stakater.com/network-restricted: "true"
+            hajimari.io/enable: "true"
+            hajimari.io/icon: "home-edit"
           enabled: true
           ingressClassName: "traefik"
           hosts:
