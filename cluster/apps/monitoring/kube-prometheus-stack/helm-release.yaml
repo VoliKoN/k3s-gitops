@@ -146,11 +146,13 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
-        # additionalScrapeConfigs:
-        # - job_name: 'node-exporter'
-        #   honor_timestamps: true
-        #   static_configs:
-        #   - targets:
+        additionalScrapeConfigs:
+        - job_name: 'node-exporter'
+          honor_timestamps: true
+          static_configs:
+          - targets:
+            # Openwrt mi4a
+            - 10.0.0.142:9100
         #     # opnsense
         #     - 192.168.1.1:9100
         #     # rocinante nas
