@@ -19,7 +19,14 @@ spec:
   values:
     fullnameOverride: prometheus
     prometheusOperator:
-      createCustomResource: false
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+            memory: 100Mi
     alertmanager:
       config:
         global:
@@ -128,16 +135,13 @@ spec:
         - hosts:
           - "prometheus.${SECRET_DOMAIN}"
       prometheusSpec:
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
+        replicas: 1
+        replicaExternalLabelName: "replica"
         ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
-        retention: 30d
+        probeSelectorNilUsesHelmValues: false
+        retention: 6h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
