@@ -153,7 +153,7 @@ spec:
             static_configs:
               - targets:
                 # Openwrt mi4a
-                - "10.0.0.142:9100"
+                - "10.0.40.142:9100"
         #     # opnsense
         #     - 192.168.1.1:9100
         #     # rocinante nas
