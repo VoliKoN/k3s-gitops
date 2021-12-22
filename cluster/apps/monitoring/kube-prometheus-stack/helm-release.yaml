@@ -83,19 +83,20 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-    nodeExporter:
-      serviceMonitor:
-        relabelings:
-        - action: replace
-          regex: (.*)
-          replacement: $1
-          sourceLabels:
-          - __meta_kubernetes_pod_node_name
-          targetLabel: kubernetes_node
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
     prometheus-node-exporter:
       fullnameOverride: node-exporter
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
     grafana:
       enabled: false
     kubelet:
@@ -147,12 +148,12 @@ spec:
                 requests:
                   storage: 50Gi
         additionalScrapeConfigs:
-        - job_name: 'node-exporter'
-          honor_timestamps: true
-          static_configs:
-          - targets:
-            # Openwrt mi4a
-            - 10.0.0.142:9100
+          - job_name: 'node-exporter'
+            honor_timestamps: true
+            static_configs:
+              - targets:
+                # Openwrt mi4a
+                - "10.0.0.142:9100"
         #     # opnsense
         #     - 192.168.1.1:9100
         #     # rocinante nas
