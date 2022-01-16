@@ -29,8 +29,8 @@ spec:
           forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "headphones"
-          # traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          # traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-authentik-embedded-outpost@kubernetescrd,networking-rfc1918-ips@kubernetescrd
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-ak-outpost-authentik-embedded-outpost@kubernetescrd,networking-rfc1918-ips@kubernetescrd
         enabled: true
         ingressClassName: "traefik"
         hosts:
