@@ -9,3 +9,4 @@ resources:
 - media
 - home
 - dev
+- cert-manager
