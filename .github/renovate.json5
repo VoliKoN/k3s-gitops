@@ -15,10 +15,10 @@
   },
   "kubernetes": {
     "fileMatch": ["cluster/.+\\.yaml$"],
-    "ignorePaths": ["cluster/base/"]
+    "ignorePaths": ["cluster/.+/gotk-components\\.ya?ml$"]
   },
   "helm-values": {
-    "fileMatch": ["cluster/.+helm-release\\.yaml$"]
+    "fileMatch": ["cluster/.+\\.ya?ml$"]
   },
   "regexManagers": [
     // regexManager to read and process HelmRelease files
