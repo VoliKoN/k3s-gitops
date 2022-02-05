@@ -8,10 +8,9 @@ resources:
 # - gonic
 - jackett
 - jellyfin
-# - lidarr
 # - overseerr
 # - plex
-# - prowlarr
+- prowlarr
 - qbittorrent
 - radarr
 # - rtorrent-flood
