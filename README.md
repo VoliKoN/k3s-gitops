@@ -29,7 +29,6 @@ The cluster is using those tools:
 There's also a couple Github workflows included in this repository that will help automate some processes.
 
 - [Flux upgrade schedule](./.github/workflows/flux-schedule.yaml) - workflow to upgrade Flux.
-- [Renovate schedule](./.github/workflows/renovate-schedule.yaml) - workflow to annotate `HelmRelease`'s which allows [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to track Helm chart versions.
 
 ## :handshake:&nbsp; Thanks
 
