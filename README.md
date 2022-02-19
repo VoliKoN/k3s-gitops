@@ -11,10 +11,8 @@ The cluster is using those tools:
 
 - [flannel](https://github.com/flannel-io/flannel)
 - [flux](https://toolkit.fluxcd.io/)
-- [~~rook-ceph~~](https://github.com/rook/rook)
 - [metallb](https://metallb.universe.tf/)
 - [cert-manager](https://cert-manager.io/) with Cloudflare DNS challenge
-- [~~ingress-nginx~~](https://kubernetes.github.io/ingress-nginx/)
 - [traefik](https://doc.traefik.io/traefik/providers/kubernetes-crd/)
 - [authentik](https://github.com/goauthentik/authentik)
 - [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller)
