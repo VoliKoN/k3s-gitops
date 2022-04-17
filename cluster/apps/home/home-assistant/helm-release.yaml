@@ -22,7 +22,6 @@ spec:
       tag: 2022.4.5
     env:
       TZ: "Asia/Jerusalem"
-      HASS_RECORDER_POSTGRESQL: "${SECRET_POSTGRESQL_PASS}"
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
     service:
@@ -59,13 +58,6 @@ spec:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
-    postgresql:
-      enabled: true
-      postgresqlPassword: "${SECRET_POSTGRESQL_PASS}"
-      persistence:
-        enabled: true
-        size: 4Gi
-        storageClass: "local-path"
     addons:
       codeserver:
         enabled: true
