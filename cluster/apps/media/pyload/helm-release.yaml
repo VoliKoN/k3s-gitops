@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/pyload
-      tag: 0.5.0
+      tag: 2021.12.15
     env:
       TZ: "Asia/Jerusalem"
       PUID: "1000"
