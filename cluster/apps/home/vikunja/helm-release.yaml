@@ -91,10 +91,11 @@ spec:
           configMap:
             name: vikunja-config-yml
     postgresql:
-      postgresqlPostgresPassword: ${SECRET_VIKUNJA_POSTGRES_ADMIN_PASSWORD}
-      postgresqlUsername: vikunja
-      postgresqlPassword: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
-      postgresqlDatabase: vikunja
+      auth:
+        postgresPassword: ${SECRET_VIKUNJA_POSTGRES_ADMIN_PASSWORD}
+        username: vikunja
+        password: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
+        database: vikunja
       enabled: true
       persistence:
         enabled: true
