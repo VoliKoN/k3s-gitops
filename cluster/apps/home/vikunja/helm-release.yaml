@@ -23,7 +23,7 @@ spec:
       config: "service:\n jwtsecret: \"${SECRET_VIKUNJA_JWT_SECRET}\"\n timezone: \"Asia/Jerusalem\""
     image:
       repository: caddy
-      tag: 2.5.1-alpine
+      tag: 2.5.2-alpine
       pullPolicy: IfNotPresent
     controllerType: deployment
     strategy:
