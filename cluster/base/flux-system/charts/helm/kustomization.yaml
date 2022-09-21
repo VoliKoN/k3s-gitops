@@ -13,7 +13,6 @@ resources:
 - vernemq-charts.yaml
 - metallb-charts.yaml
 - lwolf-charts.yaml
-- weaveworks-kured-charts.yaml
 - stakater-charts.yaml
 - authentik-charts.yaml
 - traefik-charts.yaml
