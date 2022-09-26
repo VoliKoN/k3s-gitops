@@ -16,6 +16,8 @@ spec:
         name: metallb-charts
         namespace: flux-system
   values:
+    crds:
+      enabled: true
     controller:
       image:
         repository: quay.io/metallb/controller
