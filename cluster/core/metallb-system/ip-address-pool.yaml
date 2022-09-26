@@ -4,7 +4,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: metallb-ipaddresspools
-  namespace: networking
+  namespace: metallb-system
 spec:
   addresses:
     - "${METALLB_LB_RANGE}"
@@ -14,7 +14,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: example
+  name: metal-l2
   namespace: metallb-system
 spec:
   ipAddressPools:
