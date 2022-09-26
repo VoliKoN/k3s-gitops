@@ -90,8 +90,9 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
       prometheus:
         monitor:
           enabled: true
@@ -102,10 +103,14 @@ spec:
               sourceLabels:
                 - __meta_kubernetes_pod_node_name
               targetLabel: kubernetes_node
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
     grafana:
       enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
     kubelet:
       enabled: true
       serviceMonitor:
@@ -153,6 +158,8 @@ spec:
                   storage: 50Gi
         additionalScrapeConfigs:
           - job_name: 'node-exporter'
+            scrape_interval: 1m
+            scrape_timeout: 10s
             honor_timestamps: true
             static_configs:
               - targets:
