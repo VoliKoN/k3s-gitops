@@ -6,7 +6,6 @@ resources:
 - zigbee2mqtt
 - esphome
 - node-red
-- forecastle
 - thelounge
 - wiki
 - vikunja

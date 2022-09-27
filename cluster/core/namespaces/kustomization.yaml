@@ -5,7 +5,5 @@ resources:
 - metallb-system.yaml
 - networking.yaml
 - home.yaml
-- kasten-io.yaml
 - media.yaml
 - monitoring.yaml
-- rook-ceph.yaml
