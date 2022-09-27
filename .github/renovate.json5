@@ -10,7 +10,8 @@
     ":enablePreCommit",
     "github>VoliKoN/k3s-gitops//.github/renovate/autoMerge",
     "github>VoliKoN/k3s-gitops//.github/renovate/labels",
-    "github>VoliKoN/k3s-gitops//.github/renovate/semanticCommits"
+    "github>VoliKoN/k3s-gitops//.github/renovate/semanticCommits",
+    "github>VoliKoN/k3s-gitops//.github/renovate/groups"
   ],
   "platform": "github",
   "username": "gitops-updater[bot]",
@@ -52,11 +53,6 @@
       "cluster/.+\\.ya?ml$"
     ]
   },
-  "helmv3": {
-    "fileMatch": [
-      "charts/.+/Chart\\.ya?ml$"
-    ]
-  },
   "kubernetes": {
     "fileMatch": [
       "cluster/.+\\.ya?ml$"
@@ -66,46 +62,37 @@
     ]
   },
   "regexManagers": [
-    // regexManager to read and process kube-prometheus-stack CRDs
     {
-      "fileMatch": [
-        "cluster/crds/kube-prometheus-stack/.+\\.ya?ml$"
-      ],
+      "description": "Process CRD dependencies",
+      "fileMatch": ["cluster/.+\\.ya?ml$"],
       "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n"
+        // GitRepository where 'Git release/tag' matches 'Helm' version
+        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
+        // Kustomization where 'GitHub release artifact URL' matches 'Docker image' version
+        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
       ],
-      "datasourceTemplate": "helm"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
     },
-    // regexManager to read and process External Snapshotter and External DNS CRDs
     {
+      "description": "Process various dependencies",
       "fileMatch": [
-        "cluster/crds/external-snapshotter/.+\\.ya?ml$",
-        "cluster/crds/external-dns/.+\\.ya?ml$"
+        "ansible/.+\\.ya?ml$",
+        "cluster/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n"
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
-      "datasourceTemplate": "github-releases"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
-    // regexManager to read and process github-releases innthe ansible directory
     {
-      "fileMatch": [
-        "ansible/.+\\.ya?ml$"
-      ],
+      "description": "Process raw GitHub URLs",
+      "fileMatch": ["cluster/.+\\.ya?ml$"],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_version: \"(?<currentValue>.*)\"\n"
+        "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*"
       ],
-      "datasourceTemplate": "github-releases"
-    },
-    // regexManager to read and process github-releases in the hack directory
-    {
-      "fileMatch": [
-        "hack/.+\\.sh$"
-      ],
-      "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_VERSION=\"(?<currentValue>.*)\"\n"
-      ],
-      "datasourceTemplate": "github-releases"
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ],
   "packageRules": [
@@ -125,24 +112,6 @@
     // custom versioning
     {
       "matchDatasources": [
-        "docker"
-      ],
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>.*)$",
-      "matchPackageNames": [
-        "blakeblackshear/frigate"
-      ]
-    },
-    {
-      "matchDatasources": [
-        "docker"
-      ],
-      "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))?$",
-      "matchPackageNames": [
-        "quay.io/minio/minio"
-      ]
-    },
-    {
-      "matchDatasources": [
         "docker",
         "github-releases"
       ],
@@ -154,43 +123,5 @@
         "Hypfer/Valetudo"
       ]
     },
-    // group packages
-    {
-      "matchDatasources": [
-        "helm",
-        "docker"
-      ],
-      "matchPackagePatterns": [
-        "^rook.ceph"
-      ],
-      "groupName": "rook-ceph-suite",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true
-    },
-    {
-      "matchDatasources": [
-        "github-releases",
-        "docker"
-      ],
-      "matchPackagePatterns": [
-        "external-snapshotter",
-        "snapshot-controller"
-      ],
-      "groupName": "external-snapshotter-suite",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true
-    },
-    {
-      "matchDatasources": [
-        "github-tags",
-        "docker"
-      ],
-      "matchPackagePatterns": [
-        "rancher/system-upgrade-controller"
-      ],
-      "groupName": "system-upgrade-controller-suite",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true
-    }
   ]
 }
