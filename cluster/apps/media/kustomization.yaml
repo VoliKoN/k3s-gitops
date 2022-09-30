@@ -6,7 +6,6 @@ resources:
 - bazarr
 # - flaresolverr
 # - gonic
-- jackett
 - jellyfin
 # - overseerr
 # - plex
