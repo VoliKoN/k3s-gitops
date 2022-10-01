@@ -64,10 +64,7 @@
   "regexManagers": [
     {
       "description": "Process CRD dependencies",
-      "fileMatch": ["cluster/.+\\.ya?ml$"],
-      "ignorePaths": [
-        "cluster/crds/traefik/crds.yaml"
-      ],
+      "fileMatch": ["(?!.*\/traefik\/)cluster/.+\\.ya?ml$"],
       "matchStrings": [
         // GitRepository where 'Git release/tag' matches 'Helm' version
         "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
