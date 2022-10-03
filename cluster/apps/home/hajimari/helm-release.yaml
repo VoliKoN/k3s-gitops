@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://hajimari.io
       chart: hajimari
-      version: 1.2.0
+      version: 2.0.1
       sourceRef:
         kind: HelmRepository
         name: hajimari-charts
@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/toboshii/hajimari
-      tag: v0.2.0
+      tag: v0.3.1
     env:
       TZ: "Asia/Jerusalem"
     hajimari:
@@ -35,33 +35,33 @@ spec:
       #   - name: Valetudo
       #     url: "http://192.168.1.28"
       #     icon: "robot-vacuum"
-      groups:
-        - name: Communicate
-          links:
+      globalBookmarks:
+        - group: Communicate
+          bookmarks:
             - name: Discord
               url: "https://discord.com"
             - name: Gmail
               url: "https://gmail.com"
             - name: Slack
               url: "https://slack.com/signin"
-        - name: Cloud
-          links:
+        - group: Cloud
+          bookmarks:
             - name: Cloudflare
               url: "https://dash.cloudflare.com"
             - name: Dropbox
               url: "https://dropbox.com"
             - name: Drive
               url: "https://drive.google.com"
-        - name: Media
-          links:
+        - group: Media
+          bookmarks:
             - name: Spotify
               url: "http://browse.spotify.com"
-        - name: Reading
-          links:
+        - group: Reading
+          bookmarks:
             - name: Reddit
               url: "http://reddit.com"
-        - name: Tech
-          links:
+        - group: Tech
+          bookmarks:
             - name: Hacker News
               url: "https://news.ycombinator.com/"
     ingress:
