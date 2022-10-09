@@ -14,3 +14,4 @@ resources:
 - traefik-charts.yaml
 - bitnami-charts.yaml
 - hajimari-charts.yaml
+- bjw-s-charts.yaml

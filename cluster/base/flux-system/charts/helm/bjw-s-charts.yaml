@@ -2,9 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: vernemq-charts
+  name: bjw-s-charts
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://vernemq.github.io/docker-vernemq
-  timeout: 3m
+  url: https://bjw-s.github.io/helm-charts
