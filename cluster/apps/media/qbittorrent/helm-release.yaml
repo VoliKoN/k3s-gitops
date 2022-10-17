@@ -27,7 +27,7 @@ spec:
       tag: 4.4.5@sha256:f78bda4a40b8c8734fba09e65b4553a8be89e88f746db614fe04a83ece1b817e
     env:
       TZ: "Asia/Jerusalem"
-      QBITTORRENT__PORT: &port 80
+      QBITTORRENT__PORT: &port 8080
       QBITTORRENT__BT_PORT: &port-bt 50413
     service:
       main:
