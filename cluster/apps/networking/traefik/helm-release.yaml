@@ -29,8 +29,7 @@ spec:
       enabled: true
       type: LoadBalancer
       spec:
-        externalIPs:
-          - "${INGRESS_TRAEFIK_LB}"
+        loadBalancerIP: "${INGRESS_TRAEFIK_LB}"
         externalTrafficPolicy: Local
     logs:
       general:
