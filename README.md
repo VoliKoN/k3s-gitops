@@ -5,6 +5,7 @@ This repository contains files and instructions for deploying my home cluster on
 I'm currently using a single node running in a vm on Proxmox.
 
 For docs please see [Setup](docs/setup.md).
+
 ## :wave:&nbsp; Introduction
 
 The cluster is using those tools:
@@ -13,10 +14,9 @@ The cluster is using those tools:
 - [flux](https://toolkit.fluxcd.io/)
 - [metallb](https://metallb.universe.tf/)
 - [cert-manager](https://cert-manager.io/) with Cloudflare DNS challenge
-- [traefik](https://doc.traefik.io/traefik/providers/kubernetes-crd/)
+- [ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 - [authentik](https://github.com/goauthentik/authentik)
 - [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller)
-
 
 ### :robot:&nbsp; Automation
 

@@ -11,7 +11,6 @@ resources:
 - metallb-charts.yaml
 - lwolf-charts.yaml
 - authentik-charts.yaml
-- traefik-charts.yaml
 - bitnami-charts.yaml
 - hajimari-charts.yaml
 - bjw-s-charts.yaml
