@@ -23,13 +23,11 @@ spec:
       pullPolicy: IfNotPresent
     ingress:
       enabled: true
-      ingressClassName: "traefik"
+      ingressClassName: "nginx"
       annotations:
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/icon: "https://raw.githubusercontent.com/goauthentik/authentik/983747b13b94782f4d06340497062a1bc77d78c5/website/static/img/icon.png"
-        forecastle.stakater.com/network-restricted: "true"
         hajimari.io/enable: "true"
         hajimari.io/icon: "key-variant"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
       - host: authentik.${SECRET_DOMAIN}
         paths:
@@ -37,6 +35,7 @@ spec:
       tls:
       - hosts:
         - "authentik.${SECRET_DOMAIN}"
+        secretName: "authentik-tls"
     authentik:
       secret_key: ${AUTHENTIK_SECRET_KEY}
       log_level: debug

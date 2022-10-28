@@ -48,13 +48,11 @@ spec:
     ingress:
       main:
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent.ico"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "cloud-download"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: &host "qb.${SECRET_DOMAIN}"
           paths:
@@ -63,6 +61,7 @@ spec:
         tls:
         - hosts:
           - *host
+          secretName: "qb-tls"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568

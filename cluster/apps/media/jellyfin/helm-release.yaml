@@ -40,8 +40,9 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: "simple-icons:jellyfin"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: &host "jf.${SECRET_DOMAIN}"
           paths:
@@ -50,6 +51,7 @@ spec:
         tls:
         - hosts:
           - *host
+          secretName: "jf-tls"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568

@@ -32,13 +32,11 @@ spec:
     ingress:
       main:
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/home-assistant/frontend/a339de89f50a52170945728cdbcac1a2d11d433b/public/static/icons/favicon-192x192.png"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "home-assistant"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: "ha.${SECRET_DOMAIN}"
           paths:
@@ -47,6 +45,7 @@ spec:
         tls:
         - hosts:
           - "ha.${SECRET_DOMAIN}"
+          secretName: "ha-tls"
     probes:
       liveness:
         enabled: false
@@ -76,13 +75,11 @@ spec:
         - "/config/.vscode"
         ingress:
           annotations:
-            forecastle.stakater.com/expose: "true"
-            forecastle.stakater.com/icon: "https://raw.githubusercontent.com/home-assistant/frontend/a339de89f50a52170945728cdbcac1a2d11d433b/public/static/icons/favicon-192x192.png"
-            forecastle.stakater.com/network-restricted: "true"
             hajimari.io/enable: "true"
             hajimari.io/icon: "home-edit"
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
           enabled: true
-          ingressClassName: "traefik"
+          ingressClassName: "nginx"
           hosts:
           - host: "ha-vscode.${SECRET_DOMAIN}"
             paths:
@@ -91,6 +88,7 @@ spec:
           tls:
           - hosts:
             - "ha-vscode.${SECRET_DOMAIN}"
+            secretName: "ha-vscode-tls"
         volumeMounts:
         - name: config
           mountPath: /config

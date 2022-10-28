@@ -25,13 +25,11 @@ spec:
     ingress:
       main:
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/morpheus65535/bazarr/2bceafe5af9dbd5cb5d7a3aba719dd88f838ef4d/frontend/src/%40static/logo128.png"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "subtitles"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: "bazarr.${SECRET_DOMAIN}"
           paths:
@@ -40,6 +38,7 @@ spec:
         tls:
         - hosts:
           - "bazarr.${SECRET_DOMAIN}"
+          secretName: "bazarr-tls"
       # additionalIngresses:
       # - enabled: true
       #   nameSuffix: "api"

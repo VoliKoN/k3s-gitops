@@ -26,13 +26,11 @@ spec:
     ingress:
       main:
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://raw.githubusercontent.com/thelounge/thelounge.github.io/master/assets/logos/logo/TL_Grey%26Yellow_Vertical_logotype_Transparent_Bg/TL_Grey%26Yellow_Vertical_logotype_Transparent_Bg.png"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "forum"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: "thelounge.${SECRET_DOMAIN}"
           paths:
@@ -41,6 +39,7 @@ spec:
         tls:
         - hosts:
           - "thelounge.${SECRET_DOMAIN}"
+          secretName: "thelounge-tls"
     persistence:
       config:
         enabled: true

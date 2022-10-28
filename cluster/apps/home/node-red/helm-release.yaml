@@ -32,13 +32,11 @@ spec:
     ingress:
       main:
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://nodered.org/about/resources/media/node-red-icon-2.png"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "resistor-nodes"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
         - host: "nodered.${SECRET_DOMAIN}"
           paths:
@@ -47,6 +45,7 @@ spec:
         tls:
         - hosts:
           - "nodered.${SECRET_DOMAIN}"
+          secretName: "nodered-tls"
     resources:
       requests:
         memory: 350Mi

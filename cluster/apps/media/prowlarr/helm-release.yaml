@@ -26,12 +26,11 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "cloud-search"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: "prowlarr.${SECRET_DOMAIN}"
             paths:
@@ -40,6 +39,7 @@ spec:
         tls:
           - hosts:
               - "prowlarr.${SECRET_DOMAIN}"
+            secretName: "prowlarr-tls"
     persistence:
       config:
         enabled: true

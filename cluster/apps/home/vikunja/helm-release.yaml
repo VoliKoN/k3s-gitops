@@ -61,14 +61,11 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/appName: "Vikunja"
-          forecastle.stakater.com/icon: "https://vikunja.io/docs/images/vikunja-logo-white.svg"
-          forecastle.stakater.com/network-restricted: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "format-list-checks"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: tasks.${SECRET_DOMAIN}
             paths:
@@ -77,6 +74,7 @@ spec:
         tls:
           - hosts:
               - "tasks.${SECRET_DOMAIN}"
+            secretName: "tasks-tls"
     persistence:
       files:
         enabled: true
