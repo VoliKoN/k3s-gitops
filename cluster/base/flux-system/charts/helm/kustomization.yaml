@@ -15,3 +15,4 @@ resources:
 - bitnami-charts.yaml
 - hajimari-charts.yaml
 - bjw-s-charts.yaml
+- dysnix-charts.yaml

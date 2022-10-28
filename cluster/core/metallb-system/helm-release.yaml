@@ -18,6 +18,8 @@ spec:
   values:
     crds:
       enabled: false
+    psp:
+      create: false
     controller:
       image:
         repository: quay.io/metallb/controller
