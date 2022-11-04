@@ -20,7 +20,6 @@ metadata:
 addressType: FQDN
 ports:
   - name: ''
-    appProtocol: https
     protocol: TCP
     port: 8006
 endpoints:
