@@ -79,6 +79,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: "alert"
+          hajimari.io/appName: "Alert Manager"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         pathType: Prefix
         hosts:
@@ -141,6 +142,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: "chart-line"
+          hajimari.io/appName: "Prometheus"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         pathType: Prefix
         hosts:

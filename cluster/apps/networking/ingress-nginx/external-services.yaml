@@ -1,0 +1,100 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pve
+  namespace: networking
+spec:
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8006
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: pve
+  namespace: networking
+subsets:
+  - addresses:
+      - ip: 10.0.40.50
+      - ip: 10.0.40.53
+    ports:
+      - port: 8006
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pve-ingress
+  namespace: networking
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "server-network"
+    hajimari.io/appName: "Proxmox"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - pve.${SECRET_DOMAIN}
+      secretName: "pve-tls"
+  rules:
+    - host: pve.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pve
+                port:
+                  number: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octoprint
+  namespace: networking
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: octoprint
+  namespace: networking
+subsets:
+  - addresses:
+      - ip: 10.0.0.150
+    ports:
+      - port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: octoprint-ingress
+  namespace: networking
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "printer-3d-nozzle"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - octoprint.${SECRET_DOMAIN}
+      secretName: "octoprint-tls"
+  rules:
+    - host: octoprint.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: octoprint
+                port:
+                  number: 80
