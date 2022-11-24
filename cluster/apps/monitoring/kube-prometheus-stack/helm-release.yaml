@@ -177,6 +177,10 @@ spec:
               - targets:
                 # Openwrt mi4a
                 - "10.0.40.142:9100"
+                # PVE-Nas
+                - "10.0.40.50:9100"
+                # PVE-Tiny
+                - "10.0.40.53:9100"
         #     # opnsense
         #     - 192.168.1.1:9100
         #     # rocinante nas
