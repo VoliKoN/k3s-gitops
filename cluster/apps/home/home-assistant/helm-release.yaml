@@ -2,33 +2,41 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: &app home-assistant
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: home-assistant
-      version: 13.4.2
+      chart: app-template
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    controller:
+      type: statefulset
     image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.12.1
+      repository: ghcr.io/onedr0p/home-assistant
+      tag: 2022.11.5@sha256:e00ce0f60ee2738183c3b69959dcb7cbdc7d50b3b50b356b7fd282bf97d5835e
     env:
-      TZ: "Asia/Jerusalem"
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+      TZ: "${TIMEZONE}"
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
+        externalIPs: ["${LB_HOME_ASSISTANT_IP}"]
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8123
     ingress:
       main:
         annotations:
@@ -57,44 +65,9 @@ spec:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
-    addons:
-      codeserver:
-        enabled: true
-        image:
-          repository: ghcr.io/k8s-at-home/code-server
-          tag: v4.6.0
-        # git:
-        #   deployKeySecret: code-server
-        workingDir: "/config"
-        args:
-        - --auth
-        - "none"
-        - --user-data-dir
-        - "/config/.vscode"
-        - --extensions-dir
-        - "/config/.vscode"
-        ingress:
-          annotations:
-            hajimari.io/enable: "true"
-            hajimari.io/icon: "home-edit"
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-          enabled: true
-          ingressClassName: "nginx"
-          hosts:
-          - host: "ha-vscode.${SECRET_DOMAIN}"
-            paths:
-            - path: /
-              pathType: Prefix
-          tls:
-          - hosts:
-            - "ha-vscode.${SECRET_DOMAIN}"
-            secretName: "ha-vscode-tls"
-        volumeMounts:
-        - name: config
-          mountPath: /config
     resources:
       requests:
-        cpu: 100m
+        cpu: 10m
         memory: 100Mi
       limits:
-        memory: 4000Mi
+        memory: 750Mi
