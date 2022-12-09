@@ -24,9 +24,9 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/jellyfin
-      tag: 10.8.8
+      tag: 10.8.8@sha256:2c08bffc7a3b58e84a9f46870f9b16c23ca3cbee3bf68cc33e66d80409eb7e78
     env:
-      TZ: "Asia/Jerusalem"
+      TZ: "${TIMEZONE}"
     service:
       main:
         type: LoadBalancer
