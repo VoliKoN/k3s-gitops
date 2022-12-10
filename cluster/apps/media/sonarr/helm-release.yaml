@@ -2,26 +2,41 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: &app sonarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: sonarr
-      version: 16.3.2
+      chart: app-template
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    controller:
+      type: statefulset
     image:
-      repository: ghcr.io/k8s-at-home/sonarr
-      tag: v3.0.9.1549
+      repository: ghcr.io/onedr0p/sonarr-develop
+      tag: 4.0.0.245@sha256:14c302586535498a019de1e72d510258f020dcdc540dcffcb4409d6dd0fde579
     env:
-      TZ: "Asia/Jerusalem"
+      TZ: "${TIMEZONE}"
+      SONARR__INSTANCE_NAME: Sonarr
+      SONARR__PORT: &port 8989
+      SONARR__LOG_LEVEL: info
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         annotations:
@@ -43,35 +58,13 @@ spec:
         - hosts:
           - "sonarr.${SECRET_DOMAIN}"
           secretName: "sonarr-tls"
-      # additionalIngresses:
-      # - enabled: true
-      #   nameSuffix: "api"
-      #   hosts:
-      #   - host: "sonarr.${SECRET_DOMAIN}"
-      #     paths:
-      #     - path: /api
-      #       pathType: Prefix
-      #   tls:
-      #   - hosts:
-      #     - "sonarr.${SECRET_DOMAIN}"
     podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-      - 1000
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.1.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: false
+        - 1000
     persistence:
       config:
         enabled: true
@@ -83,6 +76,6 @@ spec:
     resources:
       requests:
         memory: 250Mi
-        cpu: 100m
+        cpu: 10m
       limits:
         memory: 1500Mi

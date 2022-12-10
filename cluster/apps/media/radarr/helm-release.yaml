@@ -2,26 +2,40 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: &app radarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: radarr
-      version: 16.3.2
+      chart: app-template
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    controller:
+      type: statefulset
     image:
-      repository: ghcr.io/k8s-at-home/radarr
-      tag: v4.2.4.6635
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 4.3.0.6671@sha256:5a7b8bf2e487f54ed92174f37a623f0d8800c6ae6d5c708547963b7cb92bda69
     env:
-      TZ: "Asia/Jerusalem"
+      TZ: "${TIMEZONE}"
+      RADARR__INSTANCE_NAME: Radarr
+      RADARR__PORT: &port 7878
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         annotations:
@@ -43,35 +57,13 @@ spec:
         - hosts:
           - "radarr.${SECRET_DOMAIN}"
           secretName: "radarr-tls"
-      # additionalIngresses:
-      # - enabled: true
-      #   nameSuffix: "api"
-      #   hosts:
-      #   - host: "radarr.${SECRET_DOMAIN}"
-      #     paths:
-      #     - path: /api
-      #       pathType: Prefix
-      #   tls:
-      #   - hosts:
-      #     - "radarr.${SECRET_DOMAIN}"
     podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-      - 1000
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.1.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: false
+        - 1000
     persistence:
       config:
         enabled: true
@@ -83,6 +75,6 @@ spec:
     resources:
       requests:
         memory: 250Mi
-        cpu: 100m
+        cpu: 10m
       limits:
         memory: 1500Mi
