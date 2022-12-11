@@ -26,6 +26,7 @@ spec:
           annotations:
             hajimari.io/enable: "true"
             hajimari.io/icon: "home-edit"
+            hajimari.io/appName: "HA-Editor"
             cert-manager.io/cluster-issuer: "letsencrypt-production"
           enabled: true
           ingressClassName: "nginx"
