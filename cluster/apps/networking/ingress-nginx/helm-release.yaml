@@ -32,9 +32,7 @@ spec:
         - name: TZ
           value: "Asia/Jerusalem"
       service:
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: |-
-            ${INGRESS_NGINX_LB}
+        externalIPs: ["${INGRESS_NGINX_LB}"]
         externalTrafficPolicy: Local
       publishService:
         enabled: true
@@ -57,7 +55,12 @@ spec:
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-tls"
       metrics:
-        enabled: false
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: networking
+          namespaceSelector:
+            any: true
       # podAnnotations:
       #   configmap.reloader.stakater.com/reload: "cloudflare-proxied-networks"
       resources:
