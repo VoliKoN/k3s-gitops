@@ -18,7 +18,7 @@ spec:
         app.kubernetes.io/name: wiki
     spec:
       containers:
-      - image: ghcr.io/volikon/wiki:auto-1674029615 # {"$imagepolicy": "flux-system:wiki"}
+      - image: ghcr.io/volikon/wiki:auto-1674141141 # {"$imagepolicy": "flux-system:wiki"}
         name: wiki
         ports:
         - containerPort: 80
