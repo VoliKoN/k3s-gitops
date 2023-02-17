@@ -57,7 +57,7 @@ spec:
             subPath: config.yml
             readOnly: true
       - name: frontend
-        image: vikunja/frontend:0.20.2
+        image: vikunja/frontend:0.20.3
     ingress:
       main:
         enabled: true
