@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: robot-shop-charts
+      chart: robot-shop
       version: 0.1.1
       sourceRef:
         kind: HelmRepository
