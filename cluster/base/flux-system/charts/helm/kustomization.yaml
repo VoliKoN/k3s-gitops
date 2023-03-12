@@ -16,3 +16,4 @@ resources:
 - bjw-s-charts.yaml
 - dysnix-charts.yaml
 - robot-shop-charts.yaml
+- weave-gitops-charts.yaml
