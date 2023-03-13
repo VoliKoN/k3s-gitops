@@ -20,7 +20,7 @@ spec:
     image:
       repository: ghcr.io/miguelndecarvalho/speedtest-exporter
       tag: v3.5.3
-    
+
     env:
       TZ: Asia/Jerusalem
     metrics:
