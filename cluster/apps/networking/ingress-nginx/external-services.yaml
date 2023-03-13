@@ -44,7 +44,7 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - pve.${SECRET_DOMAIN}
+        - pve.${SECRET_DOMAIN}
       secretName: "pve-tls"
   rules:
     - host: pve.${SECRET_DOMAIN}
@@ -93,7 +93,7 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - octoprint.${SECRET_DOMAIN}
+        - octoprint.${SECRET_DOMAIN}
       secretName: "octoprint-tls"
   rules:
     - host: octoprint.${SECRET_DOMAIN}

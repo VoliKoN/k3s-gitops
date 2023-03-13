@@ -1,3 +1,4 @@
+---
 fail_fast: false
 repos:
   - repo: https://github.com/adrienverge/yamllint
@@ -64,4 +65,4 @@ repos:
     rev: v0.3.0
     hooks:
       - id: check-flux-helm-values
-        # exclude: (cluster/apps/home/home-assistant/patches/db-init.yaml)
+        exclude: (cluster/apps/home/home-assistant/patches/addons.yaml)

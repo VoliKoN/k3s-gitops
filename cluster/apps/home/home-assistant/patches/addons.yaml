@@ -37,7 +37,7 @@ spec:
                   pathType: Prefix
           tls:
             - hosts:
-              - *host
+                - *host
               secretName: "ha-vscode-tls"
         volumeMounts:
           - name: config

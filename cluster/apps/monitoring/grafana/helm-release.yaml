@@ -192,8 +192,8 @@ spec:
       enabled: true
     ingress:
       annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "chart-areaspline"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "chart-areaspline"
       enabled: true
       ingressClassName: "nginx"
       hosts:
