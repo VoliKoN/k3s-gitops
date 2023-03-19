@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - helm-release.yaml
-- config-pvc.yaml
+- files-pvc.yaml
 - postgres-pvc.yaml
 - config-map.yaml
 - postgres.yaml

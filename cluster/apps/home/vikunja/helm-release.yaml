@@ -2,43 +2,48 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: vikunja
+  name: &app vikunja
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: vikunja
-      version: 6.1.2
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
-    caddy:
-      noTls: true
-    vikunja:
-      config: "service:\n jwtsecret: \"${SECRET_VIKUNJA_JWT_SECRET}\"\n timezone: \"Asia/Jerusalem\""
     image:
       repository: caddy
       tag: 2.6.4-alpine
       pullPolicy: IfNotPresent
-    controllerType: deployment
-    strategy:
-      type: Recreate
-    service:
-      main:
-        port:
-          port: 8080
-        annotations:
-          prometheus.io/probe: "true"
-          prometheus.io/protocol: http
-    additionalContainers:
-      - name: api
-        image: vikunja/api:0.20.2
+    sidecars:
+      frontend:
+        image: vikunja/frontend:0.20.5
+        resources:
+          requests:
+            cpu: 10m
+            memory: 26Mi
+          limits:
+            memory: 60Mi
+      api:
+        image: vikunja/api:0.20.4
         env:
+          - name: VIKUNJA_SERVICE_TIMEZONE
+            value: ${TIMEZONE}
+          - name: VIKUNJA_SERVICE_FRONTENDURL
+            value: https://tasks.${SECRET_DOMAIN}
+          - name:  VIKUNJA_SERVICE_JWT
+            value: ${SECRET_VIKUNJA_JWT_SECRET}
           - name: VIKUNJA_DATABASE_TYPE
             value: "postgres"
           - name: VIKUNJA_DATABASE_HOST
@@ -49,32 +54,39 @@ spec:
             value: vikunja
           - name: VIKUNJA_DATABASE_PASSWORD
             value: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
+        resources:
+          requests:
+            cpu: 15m
+            memory: 100Mi
+          limits:
+            memory: 300Mi
         volumeMounts:
           - name: files
             mountPath: /app/vikunja/files
           - name: config
             mountPath: /app/vikunja/config.yml
             subPath: config.yml
-            readOnly: true
-      - name: frontend
-        image: vikunja/frontend:0.20.3
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: 'nginx'
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: "format-list-checks"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: tasks.${SECRET_DOMAIN}
+          - host: &host 'tasks.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "tasks.${SECRET_DOMAIN}"
-            secretName: "tasks-tls"
+              - *host
     persistence:
       files:
         enabled: true
@@ -83,8 +95,21 @@ spec:
       config:
         enabled: true
         type: custom
-        readOnly: true
-        mountPath: "-"
+        mountPath: '-'
         volumeSpec:
           configMap:
-            name: vikunja-config-yml
+            name: vikunja
+      caddy-config:
+        enabled: 'true'
+        mountPath: /etc/caddy/Caddyfile
+        subPath: Caddyfile
+        type: 'custom'
+        volumeSpec:
+          configMap:
+            name: vikunja
+    resources:
+      requests:
+        cpu: 15m
+        memory: 22Mi
+      limits:
+        memory: 60Mi
