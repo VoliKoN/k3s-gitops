@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app vikunja-postgres
+  namespace: home
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: postgresql
+      version: 12.2.4
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    auth:
+        postgresPassword: ${SECRET_VIKUNJA_POSTGRES_ADMIN_PASSWORD}
+        username: vikunja
+        password: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
+        database: vikunja
+    primary:
+      persistence:
+          enabled: true
+          existingClaim: vikunja-postgres-v1
