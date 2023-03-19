@@ -42,7 +42,7 @@ spec:
           - name: VIKUNJA_DATABASE_TYPE
             value: "postgres"
           - name: VIKUNJA_DATABASE_HOST
-            value: vikunja-postgresql
+            value: vikunja-postgres-postgresql
           - name: VIKUNJA_DATABASE_DATABASE
             value: vikunja
           - name: VIKUNJA_DATABASE_USER
@@ -88,13 +88,3 @@ spec:
         volumeSpec:
           configMap:
             name: vikunja-config-yml
-    postgresql:
-      auth:
-        postgresPassword: ${SECRET_VIKUNJA_POSTGRES_ADMIN_PASSWORD}
-        username: vikunja
-        password: ${SECRET_VIKUNJA_POSTGRES_PASSWORD}
-        database: vikunja
-      enabled: true
-      persistence:
-        enabled: true
-        existingClaim: vikunja-postgres-v1
