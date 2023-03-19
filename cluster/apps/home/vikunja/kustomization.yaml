@@ -6,3 +6,4 @@ resources:
 - config-pvc.yaml
 - postgres-pvc.yaml
 - config-map.yaml
+- postgres.yaml
