@@ -26,6 +26,7 @@
   ],
   "rebaseWhen": "conflicted",
   "commitBodyTable": true,
+  "commitMessagePrefix": "⬆️",
   // set up ignored deps
   "ignoreDeps": [
     "ghcr.io/fluxcd/helm-controller",
@@ -36,11 +37,6 @@
     "ghcr.io/fluxcd/source-controller"
   ],
   // set up renovate managers
-  "docker-compose": {
-    "fileMatch": [
-      "ansible/.+/docker-compose.*\\.ya?ml(\\.j2)?$"
-    ]
-  },
   "flux": {
     "fileMatch": [
       "cluster/.+\\.ya?ml$"
@@ -111,18 +107,5 @@
       "commitMessageExtra": "to {{newVersion}}"
     },
     // custom versioning
-    {
-      "matchDatasources": [
-        "docker",
-        "github-releases"
-      ],
-      "versioning": "loose",
-      "matchPackageNames": [
-        "ghcr.io/k8s-at-home/plex",
-        "ghcr.io/k8s-at-home/qbittorrent",
-        "ghcr.io/linuxserver/jellyfin",
-        "Hypfer/Valetudo"
-      ]
-    },
   ]
 }
