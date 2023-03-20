@@ -4,16 +4,10 @@ kind: Kustomization
 resources:
 - _pvc
 - bazarr
-# - flaresolverr
-# - gonic
 - jellyfin
-# - overseerr
-# - plex
 - prowlarr
 - qbittorrent
 - radarr
-# - rtorrent-flood
-# - sabnzbd
 - sonarr
-# - tautulli
 - lidarr
+- calibre-web
