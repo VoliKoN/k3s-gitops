@@ -64,10 +64,12 @@ spec:
       config:
         enabled: true
         existingClaim: calibre-web-config-v1
-      media:
+      books:
         enabled: true
-        existingClaim: nfs-media-storage-pvc
-        mountPath: /media/storage/Media
+        type: nfs
+        server: "10.0.40.50"
+        path: /media/storage/Media/Books
+        mountPath: /media/storage/Media/Books
       cache:
         enabled: true
         type: emptyDir
