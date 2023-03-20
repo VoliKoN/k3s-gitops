@@ -5,24 +5,35 @@ metadata:
   name: thelounge
   namespace: home
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: thelounge
-      version: 3.4.2
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    controller:
+      type: statefulset
     image:
       repository: thelounge/thelounge
       tag: 4.3.1
-
     env:
       THELOUNGE_HOME: "/config"
+    service:
+      main:
+        ports:
+          http:
+            port: 9000
     ingress:
       main:
         annotations:
@@ -32,15 +43,21 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         hosts:
-        - host: "thelounge.${SECRET_DOMAIN}"
+        - host: &host "thelounge.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "thelounge.${SECRET_DOMAIN}"
+          - *host
           secretName: "thelounge-tls"
     persistence:
       config:
         enabled: true
         existingClaim: thelounge-config-v1
+    resources:
+      requests:
+        memory: 250M
+        cpu: 25m
+      limits:
+        memory: 500M
