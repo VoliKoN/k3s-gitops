@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wallabag
+  namespace: media
+data:
+  haaretz.co.il.txt: |
+    http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+    strip: //ul[contains(@data-test, "relatedArticles")]
