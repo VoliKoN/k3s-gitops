@@ -27,17 +27,17 @@ spec:
       tag: 2.5.4
       pullPolicy: IfNotPresent
     env:
-      - SYMFONY__ENV__DATABASE_DRIVER: pdo_pgsql
-      - SYMFONY__ENV__DATABASE_HOST: wallabag-postgres-postgresql
-      - SYMFONY__ENV__DATABASE_PORT: 5432
-      - SYMFONY__ENV__DATABASE_NAME: wallabag
-      - SYMFONY__ENV__DATABASE_USER: wallabag
-      - SYMFONY__ENV__DATABASE_PASSWORD: ${WALLABAG_POSTGRES_PASS}
-      - SYMFONY__ENV__DOMAIN_NAME: https://wallabag.${SECRET_DOMAIN}
-      - SYMFONY__ENV__SERVER_NAME: Wallabag
-      - SYMFONY__ENV__FOSUSER_REGISTRATION: "false"
-      - SYMFONY__ENV__FOSUSER_CONFIRMATION: "false"
-      - POPULATE_DATABASE: "false"
+      SYMFONY__ENV__DATABASE_DRIVER: pdo_pgsql
+      SYMFONY__ENV__DATABASE_HOST: wallabag-postgres-postgresql
+      SYMFONY__ENV__DATABASE_PORT: 5432
+      SYMFONY__ENV__DATABASE_NAME: wallabag
+      SYMFONY__ENV__DATABASE_USER: wallabag
+      SYMFONY__ENV__DATABASE_PASSWORD: ${WALLABAG_POSTGRES_PASS}
+      SYMFONY__ENV__DOMAIN_NAME: https://wallabag.${SECRET_DOMAIN}
+      SYMFONY__ENV__SERVER_NAME: Wallabag
+      SYMFONY__ENV__FOSUSER_REGISTRATION: "false"
+      SYMFONY__ENV__FOSUSER_CONFIRMATION: "false"
+      POPULATE_DATABASE: "false"
     enableServiceLinks: false
     service:
       main:
@@ -61,6 +61,8 @@ spec:
           - hosts:
               - *host
             secretName: "wallabag-tls"
+    securityContext:
+      runAsUser: 0
     persistence:
       caddy-config:
         enabled: true
