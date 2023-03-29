@@ -30,6 +30,7 @@ spec:
           - media
           - monitoring
           - networking
+          - flux-system
       name: "Nevo"
       lightTheme: espresso
       darkTheme: espresso
