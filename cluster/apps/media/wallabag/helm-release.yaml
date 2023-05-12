@@ -64,10 +64,10 @@ spec:
     securityContext:
       runAsUser: 0
     persistence:
-      caddy-config:
+      custom-graby-config:
         enabled: true
-        mountPath: /var/www/wallabag/vendor/j0k3r/graby-site-config/haaretz.co.il.txt
-        subPath: haaretz.co.il.txt
+        mountPath: /var/www/wallabag/vendor/j0k3r/graby-site-config/themarker.com.txt
+        subPath: themarker.com.txt
         type: 'custom'
         volumeSpec:
           configMap:
