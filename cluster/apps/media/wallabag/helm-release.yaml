@@ -72,6 +72,14 @@ spec:
         volumeSpec:
           configMap:
             name: wallabag
+      custom-graby-config2:
+        enabled: true
+        mountPath: /var/www/wallabag/vendor/j0k3r/graby-site-config/newmedia.calcalist.co.il.txt
+        subPath: newmedia.calcalist.co.il.txt
+        type: 'custom'
+        volumeSpec:
+          configMap:
+            name: wallabag
     resources:
       requests:
         cpu: 100m

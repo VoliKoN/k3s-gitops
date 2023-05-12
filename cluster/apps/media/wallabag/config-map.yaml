@@ -8,3 +8,17 @@ data:
   themarker.com.txt: |
     http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
     body: //div[@data-test="articleBody"]
+    strip: //div[contains(@data-test, "tags")]
+    strip: //ul[contains(@data-test, "relatedArticles")]
+
+    find_string: data-src="https://
+    replace_string: src="https://
+
+    strip: //button
+    tidy: no
+    prune: no
+  newmedia.calcalist.co.il.txt: |
+    http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+    body: //div[@class="w-richtext"]
+    tidy: no
+    prune: no
