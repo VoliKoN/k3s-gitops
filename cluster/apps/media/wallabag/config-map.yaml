@@ -18,7 +18,12 @@ data:
     tidy: no
     prune: no
   newmedia.calcalist.co.il.txt: |
-    http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
-    body: //div[@class="w-richtext"]
+    body: //div[@class='article-2021']
+
+    strip: //div[@class='col-left']
+    strip: //div[@class='hafnaya']
+    strip: //div[@class='links-700']
+    strip: //div[@class='hafnaya-con']
+
     tidy: no
     prune: no
