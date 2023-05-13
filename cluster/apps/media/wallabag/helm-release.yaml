@@ -80,6 +80,14 @@ spec:
         volumeSpec:
           configMap:
             name: wallabag
+      custom-graby-config3:
+        enabled: true
+        mountPath: /var/www/wallabag/vendor/j0k3r/graby-site-config/haaretz.co.il.txt
+        subPath: haaretz.co.il.txt
+        type: 'custom'
+        volumeSpec:
+          configMap:
+            name: wallabag
     resources:
       requests:
         cpu: 100m

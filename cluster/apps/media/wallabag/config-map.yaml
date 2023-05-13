@@ -5,6 +5,15 @@ metadata:
   name: wallabag
   namespace: media
 data:
+  haaretz.co.il.txt: |
+    http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+    body: //div[@data-test="articleBody"]
+    strip: //div[contains(@data-test, "tags")]
+    strip: //ul[contains(@data-test, "relatedArticles")]
+
+    strip: //button
+    tidy: no
+    prune: no
   themarker.com.txt: |
     http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
     body: //div[@data-test="articleBody"]
