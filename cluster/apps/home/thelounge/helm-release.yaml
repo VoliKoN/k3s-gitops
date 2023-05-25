@@ -25,7 +25,7 @@ spec:
     controller:
       type: statefulset
     image:
-      repository: thelounge/thelounge
+      repository: ghcr.io/thelounge/thelounge
       tag: 4.4.0
     env:
       THELOUNGE_HOME: "/config"
