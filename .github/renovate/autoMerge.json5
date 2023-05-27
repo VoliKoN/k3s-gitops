@@ -7,7 +7,7 @@
       "automergeType": "branch",
       "requiredStatusChecks": null,
       "matchUpdateTypes": ["minor", "patch", "digest"],
-      "matchPackageNames": ["ghcr.io/onedr0p/prowlarr-nightly"]
+      "matchPackageNames": ["ghcr.io/onedr0p/prowlarr-nightly", "ghcr.io/onedr0p/sonarr-develop"]
     },
     {
       "description": "Auto merge container digests",
