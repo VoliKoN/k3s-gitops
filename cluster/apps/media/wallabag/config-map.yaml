@@ -30,9 +30,11 @@ data:
     body: //div[@class='article-2021']
 
     strip: //div[@class='col-left']
-    strip: //div[@class='hafnaya']
+    strip: //div[@class='col-right']
+    strip: //div[contains(@class, 'hafnaya')]
     strip: //div[@class='links-700']
     strip: //div[@class='hafnaya-con']
+    strip: //div[contains(@class, 'menu-katava1')]
 
     tidy: no
     prune: no
