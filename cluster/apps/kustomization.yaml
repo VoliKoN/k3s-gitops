@@ -10,4 +10,4 @@ resources:
 - media
 - home
 - cert-manager
-- dev
+# - dev
