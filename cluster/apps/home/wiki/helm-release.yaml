@@ -31,6 +31,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "wikipedia"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+        enabled: true
         ingressClassName: "nginx"
         hosts:
         - host: "wiki.${SECRET_DOMAIN}"
