@@ -20,6 +20,8 @@ spec:
     image:
       repository: ghcr.io/volikon/wiki
       tag: latest@sha256:cc8ea3259158fdcd58b2b0cfb9839c10ab6c33614ddd29bd28f4451d5c059b17
+    imagePullSecrets:
+    - name: ghcr-creds
     service:
       main:
         ports:
