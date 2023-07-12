@@ -52,7 +52,7 @@ jobs:
                 "hostType": "docker",
                 "matchHost": "ghcr.io",
                 "username": "${{ github.actor }}",
-                "password": "${{ secrets.GITHUB_TOKEN }}"
+                "password": "${{ secrets.GHCR_DOCKER_PASSWORD }}"
               }
             ]
         with:
