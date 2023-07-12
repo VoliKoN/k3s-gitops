@@ -159,6 +159,8 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 6h
+        retentionSize: "6GB"
+        scrapeInterval: 1m
         enableAdminAPI: true
         walCompression: true
         storageSpec:
