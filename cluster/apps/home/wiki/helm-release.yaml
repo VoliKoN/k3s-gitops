@@ -19,7 +19,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/volikon/wiki
-      tag: 1.0.0@sha256:d6e974da2ede6579c3c0c9113d331011fe211621fb2dea018588bee1f98dea38
+      tag: 1.0.0@sha256:db4247e21289e77bf22374a7cf250663999e736832e331edae633e44f797c063
     imagePullSecrets:
     - name: ghcr-creds
     service:
