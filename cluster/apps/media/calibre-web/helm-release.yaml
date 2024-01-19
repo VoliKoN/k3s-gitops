@@ -26,7 +26,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/bjw-s/calibre-web
-      tag: 0.6.20@sha256:5bd1c1cee482e52ece70e4e2fe0589d1910455e3e09e330c92c24bd304edccfb
+      tag: 0.6.21@sha256:1a738c3e89df1e855643fcc341f166152df7b191a833367c6537130973676913
     env:
       TZ: "${TIMEZONE}"
       CACHE_DIR: /cache
