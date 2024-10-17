@@ -26,7 +26,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/onedr0p/home-assistant
-      tag: 2024.1.3@sha256:f1adaefd28f877f6377487d6c4e7d7daf01db73bfcad8379314ab507b84a6666
+      tag: 2024.10.2@sha256:65cdf4722e85785a67842810e1c747e42aca4650262a3eb9649ccab3246fc5d3
     env:
       TZ: "${TIMEZONE}"
     service:
