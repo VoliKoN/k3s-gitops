@@ -22,9 +22,5 @@ spec:
   tolerations:
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
-  prepare:
-    # Defaults to the same "resolved" tag that is used for the `upgrade` container, NOT `latest`
-    image: rancher/k3s-upgrade
-    args: ["prepare", "k3s-server"]
   upgrade:
     image: rancher/k3s-upgrade
