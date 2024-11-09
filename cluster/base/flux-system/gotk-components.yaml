@@ -8845,9 +8845,12 @@ spec:
                   type: object
                 type: array
             required:
-            - chart
             - interval
             type: object
+            x-kubernetes-validations:
+            - message: either chart or chartRef must be set
+              rule: (has(self.chart) && !has(self.chartRef)) || (!has(self.chart)
+                && has(self.chartRef))
           status:
             default:
               observedGeneration: -1
@@ -12199,6 +12202,7 @@ spec:
                 - gcr
                 - nexus
                 - acr
+                - cdevents
                 type: string
             required:
             - resources
