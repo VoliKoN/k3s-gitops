@@ -55,8 +55,8 @@ spec:
         enabled: true
         allow_sign_up: true
         name: Authentik
-        client_id: grafana
-        client_secret: ${SECRET_AUTHENTIK_GRAFANA_CLIENT_SECRET}
+        client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+        client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
         scopes: openid profile email
         auth_url: https://authentik.${SECRET_DOMAIN}/application/o/authorize/
         token_url: https://authentik.${SECRET_DOMAIN}/application/o/token/
@@ -207,3 +207,9 @@ spec:
     persistence:
       enabled: true
       existingClaim: grafana-config-v1
+    extraSecretMounts:
+    - name: auth-generic-oauth-secret-mount
+      secretName: auth-generic-oauth-secret
+      defaultMode: 0440
+      mountPath: /etc/secrets/auth_generic_oauth
+      readOnly: true
