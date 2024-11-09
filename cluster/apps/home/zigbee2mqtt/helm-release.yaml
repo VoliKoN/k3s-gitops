@@ -26,7 +26,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/koenkk/zigbee2mqtt
-      tag: 1.33.0
+      tag: 1.35.1
     env:
       TZ: "${TIMEZONE}"
       ZIGBEE2MQTT_DATA: /data
@@ -73,4 +73,4 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - {key: "feature.node.kubernetes.io/custom-zigbee", operator: In, values: ["true"]}
+            - {key: "feature.node.kubernetes.io/usb-02_0451_16a8.present", operator: In, values: ["true"]}
