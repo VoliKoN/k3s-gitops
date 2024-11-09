@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.13.3
+      version: v1.16.1
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
@@ -26,8 +26,6 @@ spec:
       retries: 3
   values:
     installCRDs: true
-    webhook:
-      enabled: true
     extraArgs:
     - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
     - --dns01-recursive-nameservers-only

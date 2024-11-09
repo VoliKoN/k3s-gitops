@@ -1,111 +1,114 @@
 {
-  "extends": [
-    ":enableRenovate",
-    "config:base",
-    ":disableRateLimiting",
-    ":dependencyDashboard",
-    ":semanticCommits",
-    ":separatePatchReleases",
-    "docker:enableMajor",
-    ":enablePreCommit",
-    "github>VoliKoN/k3s-gitops//.github/renovate/autoMerge.json5",
-    "github>VoliKoN/k3s-gitops//.github/renovate/labels.json5",
-    "github>VoliKoN/k3s-gitops//.github/renovate/semanticCommits.json5",
-    "github>VoliKoN/k3s-gitops//.github/renovate/groups.json5",
-    "github>VoliKoN/k3s-gitops//.github/renovate/disabledDatasources.json5"
+  extends: [
+    ':enableRenovate',
+    'config:recommended',
+    ':disableRateLimiting',
+    ':dependencyDashboard',
+    ':semanticCommits',
+    ':separatePatchReleases',
+    'docker:enableMajor',
+    ':enablePreCommit',
+    'github>VoliKoN/k3s-gitops//.github/renovate/autoMerge.json5',
+    'github>VoliKoN/k3s-gitops//.github/renovate/labels.json5',
+    'github>VoliKoN/k3s-gitops//.github/renovate/semanticCommits.json5',
+    'github>VoliKoN/k3s-gitops//.github/renovate/groups.json5',
+    'github>VoliKoN/k3s-gitops//.github/renovate/disabledDatasources.json5',
   ],
-  "platform": "github",
-  "username": "gitops-updater[bot]",
-  "repositories": ["VoliKoN/k3s-gitops"],
-  "onboarding": false,
-  "requireConfig": false,
-  "gitAuthor": "rosey-bot <99018933+gitops-updater[bot]@users.noreply.github.com>",
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": [
-    "prIgnoreNotification"
+  platform: 'github',
+  username: 'gitops-updater[bot]',
+  repositories: [
+    'VoliKoN/k3s-gitops',
   ],
-  "rebaseWhen": "conflicted",
-  "commitBodyTable": true,
-  "commitMessagePrefix": "⬆️",
-  // set up ignored deps
-  "ignoreDeps": [
-    "ghcr.io/fluxcd/helm-controller",
-    "ghcr.io/fluxcd/image-automation-controller",
-    "ghcr.io/fluxcd/image-reflector-controller",
-    "ghcr.io/fluxcd/kustomize-controller",
-    "ghcr.io/fluxcd/notification-controller",
-    "ghcr.io/fluxcd/source-controller"
+  onboarding: false,
+  requireConfig: 'optional',
+  gitAuthor: 'rosey-bot <99018933+gitops-updater[bot]@users.noreply.github.com>',
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  suppressNotifications: [
+    'prIgnoreNotification',
   ],
-  // set up renovate managers
-  "flux": {
-    "fileMatch": [
-      "cluster/.+\\.ya?ml$"
+  rebaseWhen: 'conflicted',
+  commitBodyTable: true,
+  commitMessagePrefix: '⬆️',
+  ignoreDeps: [
+    'ghcr.io/fluxcd/helm-controller',
+    'ghcr.io/fluxcd/image-automation-controller',
+    'ghcr.io/fluxcd/image-reflector-controller',
+    'ghcr.io/fluxcd/kustomize-controller',
+    'ghcr.io/fluxcd/notification-controller',
+    'ghcr.io/fluxcd/source-controller',
+  ],
+  flux: {
+    fileMatch: [
+      'cluster/.+\\.ya?ml$',
     ],
-    "ignorePaths": [
-      "cluster/.+/gotk-components\\.ya?ml$"
-    ]
-  },
-  "helm-values": {
-    "fileMatch": [
-      "cluster/.+\\.ya?ml$"
-    ]
-  },
-  "kubernetes": {
-    "fileMatch": [
-      "cluster/.+\\.ya?ml$"
+    ignorePaths: [
+      'cluster/.+/gotk-components\\.ya?ml$',
     ],
-    "ignorePaths": [
-      "cluster/.+/gotk-components\\.ya?ml$"
-    ]
   },
-  "regexManagers": [
+  'helm-values': {
+    fileMatch: [
+      'cluster/.+\\.ya?ml$',
+    ],
+  },
+  kubernetes: {
+    fileMatch: [
+      'cluster/.+\\.ya?ml$',
+    ],
+    ignorePaths: [
+      'cluster/.+/gotk-components\\.ya?ml$',
+    ],
+  },
+  customManagers: [
     {
-      "description": "Process CRD dependencies",
-      "fileMatch": ["cluster/.+\\.ya?ml$"],
-      "matchStrings": [
-        // GitRepository where 'Git release/tag' matches 'Helm' version
-        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
-        // Kustomization where 'GitHub release artifact URL' matches 'Docker image' version
-        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
+      customType: 'regex',
+      description: 'Process CRD dependencies',
+      fileMatch: [
+        'cluster/.+\\.ya?ml$',
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
+      matchStrings: [
+        'registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n',
+        'datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)/(?<currentValue>[^/]+)/[^/]+\n',
+      ],
+      datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}',
     },
     {
-      "description": "Process various dependencies",
-      "fileMatch": [
-        "ansible/.+\\.ya?ml$",
-        "cluster/.+\\.ya?ml$"
+      customType: 'regex',
+      description: 'Process various dependencies',
+      fileMatch: [
+        'ansible/.+\\.ya?ml$',
+        'cluster/.+\\.ya?ml$',
       ],
-      "matchStrings": [
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+      matchStrings: [
+        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?"(?<currentValue>.*)"\n',
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
     },
     {
-      "description": "Process raw GitHub URLs",
-      "fileMatch": ["cluster/.+\\.ya?ml$"],
-      "matchStrings": [
-        "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*"
+      customType: 'regex',
+      description: 'Process raw GitHub URLs',
+      fileMatch: [
+        'cluster/.+\\.ya?ml$',
       ],
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
-    }
+      matchStrings: [
+        'https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*',
+      ],
+      datasourceTemplate: 'github-releases',
+      versioningTemplate: 'semver',
+    },
   ],
-  "packageRules": [
-    // setup datasources
+  packageRules: [
     {
-      "matchDatasources": [
-        "helm"
+      matchDatasources: [
+        'helm',
       ],
-      "ignoreDeprecated": true
+      ignoreDeprecated: true,
     },
     {
-      "matchDatasources": [
-        "docker"
+      matchDatasources: [
+        'docker',
       ],
-      "commitMessageExtra": "to {{newVersion}}"
+      commitMessageExtra: 'to {{newVersion}}',
     },
-    // custom versioning
-  ]
+  ],
 }
