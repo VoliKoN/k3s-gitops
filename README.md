@@ -1,5 +1,7 @@
 # My k3s cluster
 
+> **This project is being decommissioned.** It is being replaced by a simpler Docker Compose setup. No new features will be added — only minimal maintenance.
+
 This repository contains files and instructions for deploying my home cluster on [k3s](https://k3s.io/) using [k3sup](https://github.com/alexellis/k3sup) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/).
 
 I'm currently using a single node running in a vm on Proxmox.
