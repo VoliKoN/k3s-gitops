@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: caddy
-      tag: 2.8.4-alpine
+      tag: 2.11.1-alpine
       pullPolicy: IfNotPresent
     sidecars:
       frontend:
